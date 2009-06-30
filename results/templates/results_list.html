@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Result listing{% endblock %}
+
+{% block content %}
+<h1>Results listing</h1>
+<h3><a href="/results">Back to home</a></h3>
+<ul>
+  {% for result in object_list %}
+    <li>
+      {{ result.place }} | {{ result.lastName }} | {{ result.firstName }} | {{ result.countryCode }} | {{ result.finalTime }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

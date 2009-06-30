@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Race listing{% endblock %}
+{% block content %}
+<ul>
+	<h1>Lucky Duck</h1>
+	 {% for race in object_list %}
+	<li>
+		<a href="{% url results.views.show_results key=race.key %}">{{ race.description }} / {{ race.raceNumber }}</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

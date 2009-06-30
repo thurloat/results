@@ -1,0 +1,18 @@
+/*****  Containers CSS designed by bind.pt 		*****/
+/*****  00 Title  							    *****/
+
+.container					{ margin-bottom:10px; }
+
+.C00_TitleLine				{ margin:0px; position:relative; height:5px; }
+.C00_Title					{ float:left; font-family:Arial; font-size:12px; font-weight:700; line-height:100%; color:#9e1905; }
+.C00_Actions				{ float:left; width:0px; }
+.C00_Visibility				{ float:right; }
+.C00_Visibility a:hover		{ background-color:Transparent; }
+
+.C00_ContentPane			{ margin:10px 0px 0px; }
+.FullContentPane			{ width:100%; }
+
+.C00_Icons					{ margin-right: 0px; }
+
+.C00_Icons a img,
+.C00_Icons input			{ margin-top:10px; }

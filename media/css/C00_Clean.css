@@ -1,0 +1,12 @@
+/*****  Containers CSS designed by bind.pt 		*****/
+/*****  00 Clean         					    *****/
+
+.container_clean			{ padding-bottom:0px; padding-right:10px; }
+
+.C00_ContentPane_NT			{ margin:0px; }
+.FullContentPane			{ width:100%; }
+
+.C00_Icons					{ margin-right: 0px; }
+
+.C00_Icons a img,
+.C00_Icons input			{ margin-top:10px; }

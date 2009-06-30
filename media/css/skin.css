@@ -1,0 +1,214 @@
+/*========================================================*/
+/*  1. Universal                                          */
+/*========================================================*/
+
+html								{ }
+table, tr, td						{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: normal; color: #333; line-height: 140%; }
+p, div, ul, li						{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: normal; color: #333; line-height: 140%; }
+p									{ display: block; margin:0; padding: 0 0 5px 0; } 
+.icon                               { line-height:0; }
+
+li									{ list-style: none outside url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/li.gif'); }
+ol li								{ list-style: decimal; }
+ul li								{ list-style: none outside url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/li.gif'); }
+li									{ margin: 5px 0; }
+
+/*========================================================*/
+/*  2. Design Elements                                    */
+/*========================================================*/
+
+#OuterContainerWrapper {padding: 10px 96px 0 96px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/dragonboat-background.png') no-repeat;}
+#OuterContainer						{ margin: 0 auto; background: #ffffff; }
+#OuterContainerMiddle				{ width: 100%; }
+#OuterContainerMiddlePadding		{ padding: 0px 20px 10px 20px; }
+img.corner							{ width: 10px; height: 10px; border: none; display: block !important; }
+.w800x600							{ width: 780px; margin: 0 auto; }
+.w1024x768							{ width: 1074px; margin: 0 auto; }
+.wFull								{ width: 90%; margin: 0 auto; }
+
+#HeaderRow							{}
+#Logo								{ width: 842px;  margin-bottom: 0px; }
+#Logo a								{ border: none; }
+#Logo a:hover						{ border: none; background: transparent; }
+#Search								{ float: right; position: relative; width: 280px; height: 30px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/search.bg.png') no-repeat; }
+span.SearchButton 					{ display: none; }
+#dnn_dnnSEARCH_txtSearch.NormalTextBox { width: 155px; height:22px; background: transparent; color: #4d4d4d; padding: 3px 0 2px 0; margin: 4px 10px 4px 77px; border: none; cursor:text;}
+a.SearchButton 						{ width:25px; height:25px; background: transparent; cursor: pointer; font-size:1px; margin:0;}
+a.SearchButton div					{ width: 26px; height: 27px; cursor: pointer; position: absolute; top: 1px; right: 10px; }
+
+#NavBar								{ height:40px; margin: 0; overflow: hidden; clear: both; }
+#NavBarBgL							{ width: 30px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.bgL.gif') no-repeat; }
+#NavBarBgL img						{ width: 30px; height: 40px; }
+#NavBarBgR							{ width: 30px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.bgR.gif') no-repeat; }
+#NavBarBgR img						{ width: 30px; height: 40px; }
+#Breadcrumb							{ padding: 0 10px 0 10px; margin: 9px 0; }
+#Breadcrumb,
+#Breadcrumb span,
+#Breadcrumb div						{ color: #999999; }
+#Language                           { margin-left:5px; }
+.BorderBottom						{ border-bottom: 1px #e4e4e4 solid; }
+#MiddleRow							{ width: 100%; }
+#HeaderBanner						{ height: 168px; position: relative; margin-bottom: 0px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/dragonboat-banner-bg.png') no-repeat top left;}
+
+#HeaderBannerBox					{ height: 148px; margin-left: 355px; margin-right: 10px; }
+#HeaderBannerBoxIn					{ width: 100%; float: left;} /*background: url('images/header.bgM2.png') repeat-x top left; }*/
+#HeaderBannerBoxIn .left			{ width: 365px; float: left; margin-left: -355px; position: relative; }
+#HeaderBannerBoxIn .right			{ width: 10px; float: right; margin-right: -10px; position: relative; }
+
+#HeaderBannerContent				{ width: 100%;  height: 148px; position: absolute; left:0; top:0; margin:auto 0px 0px; }
+#HeaderBannerPic					{ width: 480px; height: 148px; vertical-align: bottom; }
+.HeaderBannerPic					{ width: 480px; height: 148px; vertical-align: bottom; }
+#HeaderBannerPic p					{ margin: 0; padding: 0; }
+.HeaderBannerPic p					{ margin: 0; padding: 0; }
+#HeaderBannerText					{ padding: 50px 20px 20px 20px; vertical-align: middle; color: #ffffff; }
+.HeaderBannerTitle					{ font-family: Georgia, times new roman; font-size: 24px; font-weight:300; line-height: 28px; color: #ffffff; }
+#flashcontent                       { visibility:visible !important; }
+
+span.youAreHere{font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #999999;}
+#copyright{font-family: Arial, Helvetica, Verdana, Sans; font-size: 9px; font-weight: normal;  color: #000000; padding: 0 0 0 20px; }
+#FooterRow							{ margin: 10px auto 0 auto; padding-bottom: 30px; }
+
+.left								{ float: left; }
+.right								{ float: right; }
+.clear								{ clear: both; }
+.dummy								{ display: none; }
+
+/* Headings */
+h1, h1 .head				{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 24px; font-weight: 700; line-height: 24px; color: #9e1905; border: none; vertical-align: top; width: 100%; margin-bottom: 10px; }
+h2									{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 18px; font-weight: 700; line-height: 18px; color: #422925; border: none; letter-spacing: -1px; }
+h3									{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 15px; font-weight: 700; line-height: 16px; color: #382327; border: none; letter-spacing: -1px; }
+h4									{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 13px; font-weight: 700; line-height: 14px; color: #9e1905; border: none; }
+h5									{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: 700; line-height: 14px; color: #666666; border: none; }
+.textIntro							{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 10px; font-weight:300; line-height: 12px; color: #422925; border: none; margin: 10px 20px; }
+
+/* Forms */
+div.form							{ width: 500px; text-align: left; }
+div.form_group						{ text-align: left; margin-bottom: 10px; font-size: 14px; color: #60ae4b;  }
+div.form_text						{ float: left; margin: 0; }
+p.form_text							{ margin: 0 0 3px 0; }
+textarea.form_text,
+input.form_text,
+select.form_text					{ font-size: 12px; font-weight: bold; color: #333; background: #efefef; border-color: #bbb #bbb #ddd; border-width: 2px 1px 1px; padding: 0.2em; margin: 0 10px 10px 0; }
+
+/*========================================================*/
+/*  3. Content Panes                                      */
+/*========================================================*/
+
+.TopPane, .BottomPane, .ContentPane	{ margin: 0; padding: 0 7px 7px 0; vertical-align: top; width: 100%; }
+.LeftPane, .RightPane				{ margin: 0; padding: 0 7px 7px 0; vertical-align: top; width: 25%; }
+.SidePane							{ margin: 0; padding: 0 7px 7px 0; vertical-align: top; }
+.MiddlePane							{ margin: 0; padding: 0 7px 7px 0; vertical-align: top; width: 50%; }
+
+/*========================================================*/
+/*  4. Tokens                                             */
+/*========================================================*/
+
+a.USER_object:active,
+a.USER_object:visited,
+a.USER_object:link,
+.USER_object,
+a.LOGIN_object:active,
+a.LOGIN_object:visited,
+a.LOGIN_object:link,
+.LOGIN_object						{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #999999; background: transparent; text-decoration: none; }
+a.USER_object:hover,
+a.LOGIN_object:hover				{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #333333; background: transparent; text-decoration: underline; }
+
+a.BREADCRUMBS_object:active			{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #9e1905; background: transparent; text-decoration: none; }
+a.BREADCRUMBS_object:visited,
+a.BREADCRUMBS_object:link,
+.BREADCRUMBS_object					{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #999999; background: transparent; text-decoration: none; }
+a.BREADCRUMBS_object:hover			{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #333333; background: transparent; text-decoration: underline; }
+
+.FOOTER_objects						{ background: transparent; text-decoration:none; }
+a.FOOTER_objects:active,
+a.FOOTER_objects:visited,
+a.FOOTER_objects:link				{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #382327; background: transparent; text-decoration:none; border-bottom: 1px #6b584e solid; }
+a.FOOTER_objects:hover				{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 11px; font-weight: normal; color: #000000; background: transparent; text-decoration:none; border-bottom: 1px #000000 solid; }
+
+/*========================================================*/
+/*  5. Text                                               */
+/*========================================================*/
+
+.Normal,
+.normal								{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: normal; color: #333; line-height: 120%; }
+strong,
+b,
+.NormalBold							{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: bold; color: #333; line-height: 120%; }
+.NormalRed							{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: bold; color: #C00; line-height: 120%; }
+.SubHead							{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: bold; color: #333; line-height: 120%; }
+span.SubHead						{ font-size: 9px; margin:0; padding:0; }
+span.SubHead br						{ display: none; }
+.font-family						{ font-family: Arial, Helvetica, Verdana, Sans; font-size: 12px; font-weight: bold; color: #777; line-height: 120%; background: transparent; }
+
+/*========================================================*/
+/*  6. Links                                        	  */
+/*========================================================*/
+
+a:active,
+a:visited,
+a:link 								{ background:transparent; color: #019dbe; text-decoration: none; }
+a:hover								{ background:transparent; color: #000000; text-decoration: underline; }
+a.Normal:visited,
+a.Normal:link						{ background:transparent; color: #019dbe; text-decoration: none; font-weight: normal; }
+a.Normal:hover						{ background:transparent; color: #000000; text-decoration: underline; font-weight: normal; }
+a.CommandButton:active,
+a.CommandButton:visited,
+a.CommandButton:link				{ color: #9e1905; background: #FFFFFF; border: #d1c7be 1px solid; padding: 2px 3px 3px 4px; height: 18px; font-weight: normal; text-decoration: none; }
+a.CommandButton:hover				{ color: #FFFFFF; background: #d1c7be; border: #d1c7be 1px solid; padding: 2px 3px 3px 4px; height: 18px; font-weight: normal; text-decoration: none; }
+
+/*========================================================*/
+/*  7. Forms                                              */
+/*========================================================*/
+
+input								{ color: #999; }
+select								{ color: #999; }
+.StandardButton						{ color: #999; background: #EEEEEE; border-right: solid 1px #D1C7BE; border-bottom: solid 1px #D1C7BE; border-left: none; border-top: none; height: 17px; }
+.NormalTextBox						{ color: #666; background: #FFF; border: solid 1px #EBE4DD; padding-left: 4px; line-height: 12px; font-weight: normal; }
+td.NormalTextBox					{ padding: 0; margin: 0; background: transparent; border: 0; }
+
+/*========================================================*/
+/*  8. Main Menu and Module Menus                         */
+/*========================================================*/
+
+.MainMenu_MenuContainer				{ z-index: 999999; background: transparent; vertical-align: top; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.bg.gif') repeat-x; }
+.MainMenu_MenuBar					{ z-index: 999999; background: transparent; vertical-align: top; }
+/*-- submenu --*/
+.ModuleTitle_SubMenu,
+.MainMenu_SubMenu					{ z-index: 999999; margin: 0px ; background: #fff url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbarsub.bg.gif') repeat-x bottom; border-right: 1px #990000 solid; border: 1px #e4e4e4 solid; border-bottom: 2px #e4e4e4 solid; padding: 0 5px 5px 5px; }
+
+/*-- submenu items idle       --*/
+.ModuleTitle_MenuItem,
+.MainMenu_MenuItem					{ color: #9e1905; font-size: 12px; font-weight: normal; width: 100%; height: 23px; padding: 4px 50px 4px 30px; border: 0; border-bottom: 1px #f5f5f5 solid; white-space: nowrap; }
+/*-- submenu items hover      --*/
+.ModuleTitle_MenuItemSel,
+.MainMenu_MenuItemSel				{ color: #FFFFFF; font-size: 12px; font-weight: normal; width: 100%; height: 23px; padding: 4px 50px 4px 30px; border: 0; border-bottom: 1px #f5f5f5 solid; white-space: nowrap; background-color: #9e1905; }
+
+/*-- menuitems idle           --*/
+.MainMenu_Idle						{ z-index: 999999; color: #422925; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; text-decoration: none; }
+.MainMenu_Idle td					{ z-index: 999999; color: #422925; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; }
+/*-- menuitems over           --*/
+.MainMenu_Selected					{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #9e1905 solid; text-decoration: none; }
+.MainMenu_Selected td				{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #9e1905 solid; background: transparent url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.on.jpg') no-repeat left; }
+/*-- menuitems active         --*/
+.MainMenu_BreadcrumbActive			{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; text-decoration: none; }
+.MainMenu_Active					{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; text-decoration: none; }
+.MainMenu_BreadcrumbActive td		{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; background: transparent url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.on.jpg') no-repeat left; }
+.MainMenu_Active td					{ z-index: 999999; color: #ffffff; font-size: 16px; font-weight: 600; height: 40px; padding: 9px 10px; margin: 0; border-right: 1px #e4e4e4 solid; background: transparent url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/navbar.on.jpg') no-repeat left; }
+
+
+/*-- not needed - main menu   --*/	.MainMenu_MenuIcon  		{ display: none; }
+									.MainMenu_RootMenuArrow  	{ display: none; }
+									.MainMenu_MenuArrow  		{ display: none; }
+/*-- module menu continer     --*/	.ModuleTitle_MenuContainer	{ color: #2c2c2c; }
+/*-- module menu bar          --*/	.ModuleTitle_MenuBar		{ cursor: pointer; cursor: pointer;}
+/*-- module menu padding      --*/	.ModuleTitle_MenuItemSel	{ padding: 0px 5px 0px 0px; }
+									.ModuleTitle_MenuItem		{ padding: 0px 5px 0px 0px; }
+/*-- not needed - module menu --*/	.ModuleTitle_MenuIcon 		{ display: none; }
+									.ModuleTitle_RootMenuArrow	{ display: none; }
+									.ModuleTitle_MenuArrow		{ display: none; }
+									.MainMenu_MenuBreak			{ display: none; }
+									.MainMenuSeperator			{ display: none; }
+									.ModuleTitle_MenuBreak		{ display: none; }
+
+

@@ -1,0 +1,164 @@
+body {
+	background: #9e1905 url('images/page.bg.texture.gif');
+	margin:0;
+	padding:0;
+}
+
+table#results {
+	width: 75%;
+	margin: 0 auto;
+}
+
+table#results, table#results td {
+border:none;
+border-collapse:collapse;
+}
+
+table#results th {
+padding-right:10px;
+padding-left:8px;
+font-weight:100;
+color:#666;
+text-align:center;
+}
+
+table#results td {
+color:#666;
+padding:5px;
+text-align:center;
+}
+
+table#results tr {
+	border-bottom: solid #f1f1f1 1px;
+}
+
+ul.raceEvents {
+list-style:none;
+border-bottom:1px solid #ccc;
+padding-bottom:10px;
+}
+
+ul li.pastEvent a {
+color:#999;
+}
+
+ul li.pastEvent a:hover {
+color:#000;
+text-decoration:none;
+}
+
+ul li.upcomingEvent a {
+color:#000;
+}
+
+ul li.upcomingEvent a:hover {
+color:#b7171e;
+text-decoration:none;
+}
+
+ul#eventDays {
+list-style:none;
+padding:0;
+margin:0;
+}
+
+ul#eventDays li {
+float:left;
+width:21px;
+height:21px;
+padding:0;
+margin:0 5px 0 0;
+}
+
+ul#eventDays li a {
+display:block;
+width:21px;
+height:19px;
+color:#fff;
+font-weight:700;
+background-image:url(../images/dayBg.jpg);
+background-repeat:no-repeat;
+overflow:hidden;
+font-family:Helvetica, Arial, sans-serif;
+letter-spacing:-1px;
+font-size:14px;
+padding:2px 0 0 3px;
+}
+
+ul#eventDays li a:hover {
+background-position:0 -21px;
+text-decoration:none;
+}
+
+ul#eventDays li.currentDay a {
+background-position:0 -21px;
+color:#fff;
+}
+
+ul#eventDays li.currentDay a:hover {
+color:#fff;
+}
+
+form.bioSearch {
+padding:0!important;
+margin:0 0 5px 0!important;
+float:left;
+clear:left;
+}
+
+table.athleteBio {
+float:left;
+width:230px;
+border-right:1px solid #ccc;
+border-bottom:1px solid #ccc;
+padding:5px 0 5px 5px;
+margin:5px 0 5px 5px;
+}
+
+table.athleteBio ul {
+padding:0;
+margin:0;
+list-style:none;
+}
+
+table.athleteBio ul.athleteEvents li a {
+font-size:11px;
+color:#666;
+text-decoration:none;
+}
+
+table.athleteBio ul.athleteEvents li a:hover {
+text-decoration:none;
+color:#b7171e;
+}
+
+table.athleteBio ul li.athleteName {
+font-weight:700;
+color:#b7171e;
+}
+
+div.eventsHolder {
+width:240px;
+float:left;
+margin-right:50px;
+padding-bottom:30px;
+text-align:center;
+}
+
+ul.festivalEvent {
+padding:0;
+margin:0;
+list-style:none;
+padding:15px 0 15px 0;
+border-bottom:1px solid #ccc;
+width:250px;
+}
+
+ul.festivalEvent li {
+color:#666;
+}
+
+ul.festivalEvent li strong {
+color:#000;
+font-weight:700;
+}

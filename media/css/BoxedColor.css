@@ -1,0 +1,11 @@
+/*========================================================*/
+/*  1. Universal                                          */
+/*========================================================*/
+
+.displaycss							{ }
+body								{ background: #9e1905 url(http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/page.bg.texture.gif); margin:0; padding:0; }
+#PageBgImage						{height: 570px; text-align: center; margin:0 auto; padding: 0 0 30px 0; }
+#OuterContainerTop					{ background: url(http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/boxed.TR.gif) no-repeat top right; text-align: left;}
+#OuterContainerBottom				{ background: url(http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/boxed.BR.gif) no-repeat top right; text-align: left; }
+
+

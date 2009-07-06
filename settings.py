@@ -104,6 +104,7 @@ INSTALLED_APPS = (
 	'results',
     'registration',
     'mediautils',
+	'bios',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

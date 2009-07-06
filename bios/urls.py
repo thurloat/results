@@ -10,7 +10,6 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('bios.views',
-	(r'^$', 'show_something'),
 	(r'^athletes/(?P<team>\d{3})/$', 'show_athletes_by_team'),
 	(r'^athletes/(?P<country>[A-Z]{3})/$', 'show_athletes_by_country'),
 	(r'^athletes/(?P<country>[A-Z]{3})/(?P<identifier>.+)$', 'show_athlete'),

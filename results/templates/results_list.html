@@ -7,7 +7,9 @@
 <ul>
   {% for result in object_list %}
     <li>
-      {{ result.place }} | {{ result.lastName }} | {{ result.firstName }} | {{ result.countryCode }} | {{ result.finalTime }}
+      <div class="result_col">{{ result.place }}</div>
+      <div class="result_col">{{ result.lastName }}, {{ result.firstName }}</div> 
+	<div class="result_col">{{ result.finalTime }}</div> 
     </li>
   {% endfor %}
 </ul>

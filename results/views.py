@@ -20,7 +20,7 @@ from ragendja.template import render_to_response
 from results.models import Race, Results
 
 def show_races(request):
-	return object_list(request,Race.all(),paginate_by = 2)
+	return object_list(request,Race.all())
 def show_race(request, key):
 	return object_list(request,Race.all(),key)
 def show_result(request, key):
@@ -39,13 +39,11 @@ def upload(request):
         importReader = csv.reader(file_contents.split('\n'))
         for row in importReader:
             imported += [row]
-        print "a"
-        print imported[1]
-        print "b"
         existing = Race.all()
+        #db.delete(existing)
         existing.filter("raceNumber =", imported[0][0])
         if existing.count(1) > 0:
-            print "Record Already Exists, Updating Race Info Instead of Inserting"
+            pass
         else:
             #validate data structure
             if len(imported[0]) >= 6:
@@ -73,6 +71,14 @@ def upload(request):
                                     race=race)
                     result.put()
                 print("Race %s imported." % race.description)
+            elif len(imported[0]) == 5:
+                for r in imported:
+                    if len(r[0]) > 0:
+                        race = Race(raceNumber = r[0],
+                                    roundNumber = r[1],
+                                    heatNumber = r[2],
+                                    description = r[3])
+                        race.put()
             else:
                 print("Race Data Structure Not Acceptable.")
                 self.error(500)

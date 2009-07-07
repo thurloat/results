@@ -43,6 +43,8 @@ class UploadHandler(webapp.RequestHandler):
 			print "Record Already Exists, Updating Race Info Instead of Inserting"
 		else:
 			#validate data structure
+			print "sdfsdf"
+			print len(imported[0])
 			if len(imported[0]) == 6:
 				#insert new records
 				race = Race(raceNumber = imported[0][0],
@@ -68,8 +70,10 @@ class UploadHandler(webapp.RequestHandler):
 									race=race)
 					result.put()
 				print("Race %s imported." % race.description)
+			elif len(imported[0]) == 5:
+				pass
 			else:
-				print("Race Data Structure Not Acceptable.")
-				self.error(500)
+				print len(imported[0])
+			
 			#import the rest of the results.
 	

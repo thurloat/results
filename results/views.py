@@ -48,7 +48,7 @@ def upload(request):
             print "Record Already Exists, Updating Race Info Instead of Inserting"
         else:
             #validate data structure
-            if len(imported[0]) == 6:
+            if len(imported[0]) >= 6:
                 #insert new records
                 race = Race(raceNumber = imported[0][0],
                         roundNumber = imported[0][1],

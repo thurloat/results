@@ -69,7 +69,7 @@ class UploadHandler(webapp.RequestHandler):
 					result.put()
 				print("Race %s imported." % race.description)
 			else:
-				print("Race Data Scrutcture Not Acceptable.")
+				print("Race Data Structure Not Acceptable.")
 				self.error(500)
 			#import the rest of the results.
 	

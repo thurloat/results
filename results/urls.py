@@ -13,4 +13,5 @@ urlpatterns = patterns('results.views',
 	(r'^$', 'show_races'),
 	(r'^detail/(?P<key>.+)$', 'show_result'),
 	(r'^details/(?P<key>.+)$', 'show_results'),
+	(r'^upload/$', 'upload'),
 )

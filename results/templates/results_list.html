@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Result listing{% endblock %}
+{% block title %}Result listing {{ race.description }}{% endblock %}
 
 {% block content %}
 <h1>Results listing</h1>
-<h3><a href="/results">Back to home</a></h3>
+<h3><a href="/results">Back to race list</a></h3>
 <ul>
   {% for result in object_list %}
     <li>

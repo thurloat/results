@@ -42,36 +42,40 @@ def upload(request):
         existing = Race.all()
         #db.delete(existing)
         existing.filter("raceNumber =", imported[0][0])
-        if existing.count(1) > 0:
-            pass
-        else:
             #validate data structure
-            if len(imported[0]) >= 6:
-                #insert new records
+        if len(imported[0]) >= 6:
+            #insert new records
+            if existing.count(1) > 0:
+                race = existing.get()
+            else:
                 race = Race(raceNumber = imported[0][0],
-                        roundNumber = imported[0][1],
-                        heatNumber = imported[0][2],
-                        description = imported[0][3],
-                        windSpeed = imported[0][4],
-                        weather = imported[0][5])
+                    roundNumber = imported[0][1],
+                    heatNumber = imported[0][2],
+                    description = imported[0][3],
+                    windSpeed = imported[0][4],
+                    weather = imported[0][5])
+                
                 race.put()
-                #remove the race from the list
-                imported.pop(0)
-                #loop through the rest of the records and insert them as results.
-                for r in imported:
-                    result = Results(place=r[0],
-                                    athleteNumber=r[1],
-                                    laneNumber=r[2],
-                                    lastName=r[3],
-                                    firstName=r[4],
-                                    countryCode=r[5],
-                                    finalTime=r[6],
-                                    deltaTime=r[8],
-                                    splitDetails=r[10],
-                                    race=race)
-                    result.put()
-                print("Race %s imported." % race.description)
-            elif len(imported[0]) == 5:
+            #remove the race from the list
+            imported.pop(0)
+            #loop through the rest of the records and insert them as results.
+            for r in imported:
+                result = Results(place=r[0],
+                                athleteNumber=r[1],
+                                laneNumber=r[2],
+                                lastName=r[3],
+                                firstName=r[4],
+                                countryCode=r[5],
+                                finalTime=r[6],
+                                deltaTime=r[8],
+                                splitDetails=r[10],
+                                race=race)
+                result.put()
+            print("Race %s imported." % race.description)
+        elif len(imported[0]) == 5:
+            if existing.count(1) > 0:
+                pass
+            else:
                 for r in imported:
                     if len(r[0]) > 0:
                         race = Race(raceNumber = r[0],
@@ -79,9 +83,9 @@ def upload(request):
                                     heatNumber = r[2],
                                     description = r[3])
                         race.put()
-            else:
-                print("Race Data Structure Not Acceptable.")
-                self.error(500)
+        else:
+            print("Race Data Structure Not Acceptable.")
+            self.error(500)
         return render_to_response(request, 'results/upload.html');
     else:
         return render_to_response(request, 'results/upload.html');

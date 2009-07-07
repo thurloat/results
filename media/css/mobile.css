@@ -27,21 +27,3 @@ body, #OuterContainerWrapper, #OuterContainerMiddlePadding, #PageBgImage, table.
 	min-width: 320px;
 }
 
-#content ul {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-}
-
-#content ul li {
-	list-style-image: none;
-	border-bottom: 1px solid #aaa;
-	margin: 0;
-	width: 100%;
-	clear: both;
-}
-
-#content ul li div.result_col {
-	width: 33%;
-	float: left;
-}

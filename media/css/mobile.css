@@ -1,0 +1,40 @@
+/* background color for the content part of the pages */
+* {
+margin: 0 !important;
+padding: 0 !important;
+}
+
+.C00_Icons, #footer, #content h1, #FooterRow, #OuterContainerTop, #OuterContainerBottom, OuterContainerWrapper, #dnn_SidePane2, #dnn_ctr749_ContentPane, #dnn_dnnLOGO_imgLogo, #dnn_ctr756_ModuleContent {
+	display: none;
+}
+
+body, #OuterContainerWrapper, #OuterContainerMiddlePadding, #PageBgImage, table.w1024x768 {
+	background: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: auto !important;
+	
+}
+
+#Logo {
+	background-image: url(/images/wap_bg.jpg);
+	color: #fff;
+	font-weight: bold;
+	font-size:18px;
+	padding:6px 0 0 !important;
+	height: 31px;
+	width: 100%;
+	min-width: 320px;
+}
+
+#content ul {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#content ul li {
+	list-style-image: none;
+	border-bottom: 1px solid #aaa;
+	margin: 0;
+}

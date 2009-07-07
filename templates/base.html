@@ -16,12 +16,17 @@
 	<meta content="1 DAYS" name="REVISIT-AFTER"/>
 	<meta content="GENERAL" name="RATING"/>
 	<meta content="RevealTrans(Duration=0,Transition=1)" http-equiv="PAGE-ENTER"/>
-	<link href="/css/default.css" type="text/css" rel="stylesheet" id="_Portals__default_"/>
-	<link href="/css/skin.css" type="text/css" rel="stylesheet" id="_Portals_4_Skins_DragonBoatSkin_"/>
-	<link href="/css/C00_Clean.css" type="text/css" rel="stylesheet" id="_Portals_4_Containers_AeroDarkRed_C00_Clean_css"/>
-	<link href="/css/C00_Basic_title.css" type="text/css" rel="stylesheet" id="_Portals_4_Containers_AeroDarkRed_C00_Basic_title_css"/>
-	<link href="/css/portal.css" type="text/css" rel="stylesheet" id="_Portals_4_"/>
-	<link media="screen" type="text/css" href="css/results.css" rel="stylesheet"/>
+	<link media="screen" href="/css/default.css" type="text/css" rel="stylesheet" id="_Portals__default_"/>
+	<link media="screen" href="/css/skin.css" type="text/css" rel="stylesheet" id="_Portals_4_Skins_DragonBoatSkin_"/>
+	<link media="screen" href="/css/C00_Clean.css" type="text/css" rel="stylesheet" id="_Portals_4_Containers_AeroDarkRed_C00_Clean_css"/>
+	<link media="screen" href="/css/C00_Basic_title.css" type="text/css" rel="stylesheet" id="_Portals_4_Containers_AeroDarkRed_C00_Basic_title_css"/>
+	<link media="screen" href="/css/portal.css" type="text/css" rel="stylesheet" id="_Portals_4_"/>
+	<link media="screen" type="text/css" href="/css/results.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0;" />
+	
+	
+	<link media="only screen and (max-device-width: 480px)" href="/css/mobile.css" type="text/css" rel="stylesheet" />
+	{% block head %}{% endblock %}
 
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -34,11 +39,11 @@
 			pageTracker._trackPageview();
 			} catch(err) {}</script>
 	<link href="http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/BoxedColor.css" type="text/css" rel="stylesheet"/>
-	<title>Manulife Dragon Boat Festival &lt; Fundraising &lt; Fundraising Results {% block title %}{% endblock %}</title>
+	<title>Manulife Dragon Boat Festival &lt; Fundraising &lt; Fundraising Results</title>
   </head>
 
   <body id="Body">
-<
+
 <script type="text/javascript">
 //<![CDATA[
 var theForm = document.forms['Form'];
@@ -91,7 +96,7 @@ function __doPostBack(eventTarget, eventArgument) {
 	        <div id="OuterContainerMiddle">
 		        <div id="OuterContainerMiddlePadding">
 			        <div id="HeaderRow">
-				        <div id="Logo"><a id="dnn_dnnLOGO_hypLogo" title="Manulife Dragon Boat Festival" href="http://www.dragonboat.halifax.ns.ca/Default.aspx"><img id="dnn_dnnLOGO_imgLogo" src="http://www.dragonboat.halifax.ns.ca/Portals/4/dragonboat-logo.png" alt="Manulife Dragon Boat Festival" style="border-width:0px;" /></a></div>
+				        <div id="Logo"><a id="dnn_dnnLOGO_hypLogo" title="Manulife Dragon Boat Festival" href="http://www.dragonboat.halifax.ns.ca/Default.aspx"><img id="dnn_dnnLOGO_imgLogo" src="http://www.dragonboat.halifax.ns.ca/Portals/4/dragonboat-logo.png" alt="Manulife Dragon Boat Festival" style="border-width:0px;" /></a>{% block title %}{% endblock %}</div>
 			        </div>			
         		
 
@@ -296,6 +301,17 @@ function __doPostBack(eventTarget, eventArgument) {
 </table>
 </div>
 
- 
+<script type="text/javascript">
+			var mode = 0;
+			window.onresize = function () {
+				if (mode == 0) {
+					document.getElementById("viewport").setAttribute("content", "width=480;", false);
+					mode = 1;
+				} else {
+					document.getElementById("viewport").setAttribute("content", "width=320;", false);
+					mode = 0;
+				}
+			};
+		</script> 
 </body>
 </html>

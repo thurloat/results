@@ -27,7 +27,7 @@ img.corner							{ width: 10px; height: 10px; border: none; display: block !impo
 .wFull								{ width: 90%; margin: 0 auto; }
 
 #HeaderRow							{}
-#Logo								{ width: 842px;  margin-bottom: 0px; }
+#Logo								{ width: 842px;  margin-bottom: 0px; height: 100px; overflow: hidden;}
 #Logo a								{ border: none; }
 #Logo a:hover						{ border: none; background: transparent; }
 #Search								{ float: right; position: relative; width: 280px; height: 30px; background: url('http://www.dragonboat.halifax.ns.ca/Portals/4/Skins/DragonBoatSkin/images/search.bg.png') no-repeat; }

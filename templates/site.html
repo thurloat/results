@@ -24,7 +24,11 @@
 		<div id="content">
 			<div id="leftCol">
 				<img id="sponsorbanner" src="/images/sponsorbanner.jpg" />
-			
+				{% if messages %}
+          {% for message in messages %}
+            <div class="info">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
 				
 				{% block content %}
 				{% endblock %}

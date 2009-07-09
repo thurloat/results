@@ -17,6 +17,8 @@ from mimetypes import guess_type
 from ragendja.dbutils import get_object_or_404
 from ragendja.template import render_to_response
 
+messages = []
+
 from results.models import Race, Results
 
 def show_races(request):
@@ -40,8 +42,52 @@ def cleardata(request):
         messages.append("All results deleted")
     return render_to_response(request, 'results/delete.html', {'messages':messages});
 
+def getrace(field):
+    existing = Race.all()
+    existing.filter("raceNumber =", int(field[0]))
+    if existing.count(1) > 0:
+        race = existing.get()
+        messages.append("Updating race #" + field[0] + ": " + field[3])
+    else:
+        race = Race(raceNumber = int(field[0]))
+        messages.append("Creating NEW race #" + field[0] + ": " + field[3])
+    
+    race.roundNumber = field[1]
+    race.heatNumber = field[2]
+    
+    if len(field[3]) == 0 or field[3] == "":
+        race.description = "Event # " + field[0]
+    else:
+        race.description = field[3]
+        
+    race.windSpeed = field[4]
+    
+    if len(field) >= 6:
+        race.weather = field[5]
+    
+    return race
+
+def getresult(field, race):
+    existingresult = race.results_set.filter("place = ", int(field[0]))
+    if existingresult.count(1) > 0:
+        result = existingresult.get()
+        messages.append("Updating result:" + field[0] + " place")
+    else:
+        result = Results(place=int(field[0]), race=race)
+        messages.append("Creating NEW race result: " + field[4] + " " + field[3] + " came " +  field[0])
+        
+    result.athleteNumber = field[1]
+    result.laneNumber = field[2]
+    result.lastName = field[3]
+    result.firstName = field[4]
+    result.countryCode = field[5]
+    result.finalTime = field[6]
+    result.deltaTime = field[8]
+    result.splitDetails = field[10]
+
+    return result
+
 def upload(request):
-    messages = []
     if request.method == 'POST':
         file_contents = request.FILES['lif'].read().strip()
 
@@ -52,79 +98,25 @@ def upload(request):
         for row in importReader:
             imported += [row]
         existing = Race.all()
-        #db.delete(existing)
         existing.filter("raceNumber =", int(imported[0][0]))
             #validate data structure
         if len(imported[0]) >= 6:
-            #insert new records
-            if existing.count(1) > 0:
-                race = existing.get()
-                if race.description != imported[0][3]:
-                    messages.append("Updating race #" + imported[0][0] + ": " + imported[0][3])
-                    
-                race.description = imported[0][3]
-                
-            else:
-                race = Race(raceNumber = int(imported[0][0]),
-                    roundNumber = imported[0][1],
-                    heatNumber = imported[0][2],
-                    description = imported[0][3],
-                    windSpeed = imported[0][4],
-                    weather = imported[0][5])
-                messages.append("Creating NEW race #" + imported[0][0] + ": " + imported[0][3])
-                
+            race = getrace(imported[0])
             race.put()
             #remove the race from the list
             imported.pop(0)
             #loop through the rest of the records and insert them as results.
             for r in imported:
-                existingresult = race.results_set.filter("place = ", int(r[0]))
-                if existingresult.count(1) > 0:
-                    result = existingresult.get()
-                    if result.athleteNumber != r[1]:
-                        result.athleteNumber=r[1]
-                        result.laneNumber=r[2]
-                        result.lastName=r[3]
-                        result.firstName=r[4]
-                        result.countryCode=r[5]
-                        result.finalTime=r[6]
-                        result.deltaTime=r[8]
-                        result.splitDetails=r[10]
-                        messages.append("Updating result:" + r[0] + " place")
-                else:
-                    result = Results(place=int(r[0]),
-                                    athleteNumber=r[1],
-                                    laneNumber=r[2],
-                                    lastName=r[3],
-                                    firstName=r[4],
-                                    countryCode=r[5],
-                                    finalTime=r[6],
-                                    deltaTime=r[8],
-                                    splitDetails=r[10],
-                                    race=race)
-                    messages.append("Creating NEW race result: " + r[4] + " " + r[3] + " came " +  r[0])
+                result = getresult(r, race)
                 result.put()
                 
         elif len(imported[0]) == 5:
                 for r in imported:
                     if len(r[0]) > 0:
-                        existingrace = Race.all()
-                        existingrace.filter("raceNumber =", int(r[0]))
-                        if existingrace.count(1) > 0:
-                            race = existingrace.get()
-                            if race.description != r[3]:
-                                messages.append("Updating race #" + r[0] + ": " + r[3])
-                            race.description = r[3]
-                            race.roundNumber = r[1]
-                            race.heatNumber = r[2]
-                        else:
-                            race = Race(raceNumber = int(r[0]),
-                                        roundNumber = r[1],
-                                        heatNumber = r[2],
-                                        description = r[3])
-                            messages.append("Creating NEW race #" + r[0] + ": " + r[3])
+                        race = getrace(r)
                         race.put()
                 messages.append("Everything seems to have worked!")
         else:
             messages.append("Race Data Structure Not Acceptable.")
+
     return render_to_response(request, 'results/upload.html', {'messages':messages});

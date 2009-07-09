@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from ragendja.settings_pre import *
-
 # Increase this when you update your media on the production site, so users
 # don't have to refresh their cache. By setting this your MEDIA_URL
 # automatically becomes /media/MEDIA_VERSION/
@@ -69,6 +68,8 @@ MIDDLEWARE_CLASSES = (
     'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'ragendja.middleware.LoginRequiredMiddleware',
+    'results.middleware.mobile',
 )
 
 # Google authentication
@@ -88,7 +89,6 @@ INSTALLED_APPS = (
     # your app-specific media files get combined, so jquery should normally
     # come first.
     'jquery',
-
     # Add blueprint CSS (http://blueprintcss.org/)
     'blueprintcss',
 
@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.redirects',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'appenginepatcher',
 	'results',
     'registration',
@@ -113,6 +114,8 @@ IGNORE_APP_SETTINGS = IGNORE_APP_URLSAUTO = (
     # 'django.contrib.auth',
     # 'yetanotherapp',
 )
+
+LOGIN_REQUIRED_PREFIXES=[("/results/upload",), ('/results/delete')]
 
 # Remote access to production server (e.g., via manage.py shell --remote)
 DATABASE_OPTIONS = {

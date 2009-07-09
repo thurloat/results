@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Manulife Dragon Boat Festival</title>
+<link media="screen" type="text/css" href="/css/core.css" rel="stylesheet"/>
+<link media="handheld" type="text/css" href="/css/antiscreen.css" rel="stylesheet"/>
+<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0;" />
+</head>
+<body>
+
+<div id="outer">
+	<div id="container">
+		<div id="outertop">
+			<img src="/images/boxed.TL.gif" class="left" />
+			<img src="/images/boxed.TR.gif" class="right" />
+		</div>
+		
+		<div id="header">
+			<img src="/images/dragonboat-logo.png" />
+		</div>
+		
+		<div id="content">
+			<div id="leftCol">
+				<img id="sponsorbanner" src="/images/sponsorbanner.jpg" />
+			
+				
+				{% block content %}
+				{% endblock %}
+			</div>
+			
+			<div id="rightCol">
+			</div>
+		
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+			var mode = 0;
+			window.onresize = function () {
+				if (mode == 0) {
+					document.getElementById("viewport").setAttribute("content", "width=480;", false);
+					mode = 1;
+				} else {
+					document.getElementById("viewport").setAttribute("content", "width=320;", false);
+					mode = 0;
+				}
+			};
+		</script> 
+</html>

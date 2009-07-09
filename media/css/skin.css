@@ -213,17 +213,18 @@ td.NormalTextBox					{ padding: 0; margin: 0; background: transparent; border: 0
 
 
 #content ul {
-	margin: 0;
+	margin: 10px 0 0 0 !important;
 	padding: 0;
 	width: 100%;
 }
 
 #content ul li {
 	list-style-image: none;
-	border-bottom: 1px solid #aaa;
+	border-bottom: 1px solid #ddd;
 	margin: 0;
 	width: 100%;
 	clear: both;
+	padding: 5px 0 5px 0 !important;
 }
 
 #content ul li div.result_col {

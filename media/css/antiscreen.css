@@ -1,0 +1,73 @@
+body {
+	background-color: #fff;
+	background-image: none;
+	color: #000;
+}
+
+#outer {
+	background-image: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+#container {
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+#outertop {
+	display: none;
+}
+
+#header {
+	display: none;
+	height: 0px;
+	width: 0px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#content {
+	width: auto;
+	padding: 0;
+	float: none;
+}
+
+#leftCol {
+	width: auto;
+	float: none;
+}
+
+#rightCol {
+	display: none;
+	height: 0px;
+	width: 0px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#sponsorbanner {
+	display: none;
+	height: 0px;
+	width: 0px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+h1 {
+	background-image: url(/images/wap_bg.jpg);
+	color: #fff;
+	font-weight: bold;
+	font-size:18px;
+	padding:6px 0 0 !important;
+	height: 31px;
+	width: 100%;
+	margin: 0;
+	min-width: 320px;
+}
+
+h2 {
+	font-size: 14px;
+}

@@ -11,7 +11,7 @@ from google.appengine.ext import db
 from ragendja.dbutils import cleanup_relations
 
 class Race(db.Model):
-	raceNumber = db.StringProperty()
+	raceNumber = db.IntegerProperty()
 	roundNumber = db.StringProperty()
 	heatNumber = db.StringProperty()
 	description = db.StringProperty()
@@ -34,7 +34,7 @@ class Race(db.Model):
 		search_fields = ('description',)
 
 class Results(db.Model):
-	place = db.StringProperty()
+	place = db.IntegerProperty()
 	athleteNumber = db.StringProperty()
 	laneNumber = db.StringProperty()
 	lastName = db.StringProperty()

@@ -13,7 +13,10 @@ body, #OuterContainerWrapper, #OuterContainerMiddlePadding, #PageBgImage, table.
 	margin: 0 !important;
 	padding: 0 !important;
 	width: auto !important;
-	
+}
+
+#PageBgImage {
+	height: auto;
 }
 
 #Logo {
@@ -27,3 +30,10 @@ body, #OuterContainerWrapper, #OuterContainerMiddlePadding, #PageBgImage, table.
 	min-width: 320px;
 }
 
+#back_to_list {
+	margin: 5px 0 5px 0 !important;
+}
+
+.container {
+	width: 100% !important;
+}

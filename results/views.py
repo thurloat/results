@@ -16,13 +16,21 @@ from google.appengine.ext import db
 from mimetypes import guess_type
 from ragendja.dbutils import get_object_or_404
 from ragendja.template import render_to_response
+from google.appengine.api import memcache
 
 messages = []
 
 from results.models import Race, Results
 
 def show_races(request):
-	return object_list(request,Race.all().order("raceNumber"))
+    data = memcache.get("allraces")
+    if data is not None:
+        return data
+    else:
+        data = object_list(request,Race.all().order("raceNumber"))
+        memcache.add("allraces", data)
+        return data
+    
 def show_race(request, key):
 	return object_list(request,Race.all(),key)
 def show_result(request, key):
@@ -32,6 +40,7 @@ def show_results(request, key):
     return object_list(request,queryset=Results.all().filter("race =", race).order("place"), extra_context={'race':race})
     
 def cleardata(request):
+    memcache.delete("allraces")
     messages = []
     if request.method == 'POST':
         existing = Race.all()
@@ -90,6 +99,7 @@ def getresult(field, race):
 
 def upload(request):
     if request.method == 'POST':
+        memcache.delete("allraces")
         import re
         file = request.FILES['lif']
         uploadfile=file.name; 

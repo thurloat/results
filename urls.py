@@ -12,6 +12,7 @@ handler500 = 'ragendja.views.server_error'
 urlpatterns = auth_patterns + patterns('',
     ('^admin/(.*)', admin.site.root),
     (r'^$', 'results.views.show_races'),
+    (r'^ajax$', 'results.views.ajax'),
     # Override the default registration form
     url(r'^account/register/$', 'registration.views.register',
         kwargs={'form_class': UserRegistrationForm},

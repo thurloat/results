@@ -17,13 +17,14 @@ class Race(db.Model):
 	description = db.StringProperty()
 	windSpeed = db.StringProperty()
 	weather = db.StringProperty()
+	hasResults = db.BooleanProperty()
 	
 	def __unicode__(self):
 		return '%s - %s' % (self.raceNumber, self.description)
 	
 	def __json__(self):
 		return self.description
-	
+
 	@permalink	
 	def get_absolute_url(self):
 		return ('results.views.show_race', (), {'key': self.key()})

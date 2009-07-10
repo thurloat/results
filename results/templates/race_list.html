@@ -1,14 +1,31 @@
 {% extends 'site.html' %}
 {% block title %}Race Listing{% endblock %}
 {% block content %}
+<div id="ajax">
 <ul>
 	<h1>Race Listing</h1>
 	 {% for race in object_list %}
 	<li>
-		{% if race.results_set %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}
+		{% if race.hasResults %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}
 		{{ race.description }}
-		{% if race.results_set %}</a>{% endif %}
+		{% if race.hasResults %}</a>{% endif %}
 	</li>
 	{% endfor %}
 </ul>
+</div>
+<script>
+function refreshresults() {
+	var oXMLHttpRequest = new XMLHttpRequest();
+	oXMLHttpRequest.open("GET", "/ajax", true); 
+	oXMLHttpRequest.onreadystatechange = function() { 
+		if (this.readyState == XMLHttpRequest.DONE) { 
+			var el = document.getElementById('ajax');
+			el.innerHTML = this.responseText;
+		} 
+	} 
+	oXMLHttpRequest.send(null);
+	t=setTimeout("refreshresults()", 10000);
+}
+refreshresults();
+</script>
 {% endblock %}

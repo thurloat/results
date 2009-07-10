@@ -16,6 +16,9 @@ handlers:
 - url: /images
   static_dir: media/images
 
+- url: /js
+  static_dir: media/js
+
 - url: /media
   static_dir: _generated_media
 

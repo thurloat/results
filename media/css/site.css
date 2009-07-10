@@ -80,20 +80,33 @@ font-size:12px;
 	padding: 20px 20px 0 20px;
 }
 
+#footer {
+	background-color: #fff;
+	height: 10px;
+	margin-bottom: 40px;
+}
+
 #content {
 	float: left;
 	width: 882px;
 	padding: 0 20px 20px 20px;
+	min-height: 550px;
 }
 
 #leftCol {
-	width: 700px;
+	width: 643px;
 	float: left;
 }
 
 #rightCol {
-	width: 100px;
+	width: 189px;
 	float: left;
+	padding: 5px 20px 20px 10px;
+}
+
+#rightCol p {
+	margin-bottom: 30px;
+	line-height: 1.5;
 }
 
 .left {

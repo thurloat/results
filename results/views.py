@@ -23,13 +23,16 @@ messages = []
 from results.models import Race, Results
 
 def show_races(request):
-    data = memcache.get("allraces")
+    return object_list(request,Race.all().order("raceNumber"))
+
+def ajax(request):
+    data = memcache.get('raceshtml');
     if data is not None:
         return data
-    else:
-        data = object_list(request,Race.all().order("raceNumber"))
-        memcache.add("allraces", data)
-        return data
+    
+    data = object_list(request,Race.all().order("raceNumber"), template_name="list.html")
+    memcache.add("raceshtml", data)
+    return data
     
 def show_race(request, key):
 	return object_list(request,Race.all(),key)
@@ -40,7 +43,6 @@ def show_results(request, key):
     return object_list(request,queryset=Results.all().filter("race =", race).order("place"), extra_context={'race':race})
     
 def cleardata(request):
-    memcache.delete("allraces")
     messages = []
     if request.method == 'POST':
         existing = Race.all()
@@ -86,7 +88,8 @@ def getresult(field, race):
         result = Results(place=int(field[0]), race=race)
         messages.append("Creating NEW race result: " + field[4] + " " + field[3] + " came " +  field[0])
         
-    result.athleteNumber = field[1]
+    if len(field[1]) > 0:
+        result.athleteNumber = field[1]
     result.laneNumber = field[2]
     result.lastName = field[3]
     result.firstName = field[4]
@@ -99,14 +102,13 @@ def getresult(field, race):
 
 def upload(request):
     if request.method == 'POST':
-        memcache.delete("allraces")
         import re
         import os
         file = request.FILES['lif']
         uploadfile=file.name; 
         evt=".evt"
         lif=".lif"
-        reneedle=re.compile(evt)
+        reneedle=re.compile(evt, re.IGNORECASE)
         reneedlelif=re.compile(lif)
         
         file_contents = request.FILES['lif'].read().strip()
@@ -114,7 +116,7 @@ def upload(request):
         #file_contents = self.request.get('lif').strip()
         import csv
         imported = []
-        importReader = csv.reader(file_contents.split(os.linesep))
+        importReader = csv.reader(file_contents.split('\n'))
         for row in importReader:
             imported += [row]
         existing = Race.all()
@@ -122,13 +124,15 @@ def upload(request):
             #validate data structure
         if lif in uploadfile:
             race = getrace(imported[0])
+            race.hasResults = True
             race.put()
             #remove the race from the list
             imported.pop(0)
             #loop through the rest of the records and insert them as results.
             for r in imported:
-                result = getresult(r, race)
-                result.put()
+                if len(r[0]) > 0:
+                    result = getresult(r, race)
+                    result.put()
                 
         elif evt in uploadfile:
                 for r in imported:
@@ -138,6 +142,5 @@ def upload(request):
                 messages.append("Everything seems to have worked!")
         else:
             messages.append("Race Data Structure Not Acceptable.")
-
-        show_races(request)
+        memcache.delete("raceshtml")
     return render_to_response(request, 'results/upload.html', {'messages':messages});

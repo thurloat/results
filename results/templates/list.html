@@ -1,5 +1,4 @@
 <ul>
-	<h1>Race Listing</h1>
 	 {% for race in object_list %}
 	<li>
 		{% if race.hasResults %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}

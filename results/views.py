@@ -101,6 +101,7 @@ def upload(request):
     if request.method == 'POST':
         memcache.delete("allraces")
         import re
+        import os
         file = request.FILES['lif']
         uploadfile=file.name; 
         evt=".evt"
@@ -113,7 +114,7 @@ def upload(request):
         #file_contents = self.request.get('lif').strip()
         import csv
         imported = []
-        importReader = csv.reader(file_contents.split("\n"))
+        importReader = csv.reader(file_contents.split(os.linesep))
         for row in importReader:
             imported += [row]
         existing = Race.all()

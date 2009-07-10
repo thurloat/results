@@ -138,4 +138,5 @@ def upload(request):
         else:
             messages.append("Race Data Structure Not Acceptable.")
 
+        show_races(request)
     return render_to_response(request, 'results/upload.html', {'messages':messages});

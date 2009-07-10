@@ -60,7 +60,8 @@ def getrace(field):
     else:
         race.description = field[3]
         
-    race.windSpeed = field[4]
+    if len(field) >= 5:
+        race.windSpeed = field[4]
     
     if len(field) >= 6:
         race.weather = field[5]
@@ -89,18 +90,26 @@ def getresult(field, race):
 
 def upload(request):
     if request.method == 'POST':
+        import re
+        file = request.FILES['lif']
+        uploadfile=file.name; 
+        evt=".evt"
+        lif=".lif"
+        reneedle=re.compile(evt)
+        reneedlelif=re.compile(lif)
+        
         file_contents = request.FILES['lif'].read().strip()
 
         #file_contents = self.request.get('lif').strip()
         import csv
         imported = []
-        importReader = csv.reader(file_contents.split('\n'))
+        importReader = csv.reader(file_contents.split("\n"))
         for row in importReader:
             imported += [row]
         existing = Race.all()
         existing.filter("raceNumber =", int(imported[0][0]))
             #validate data structure
-        if len(imported[0]) >= 6:
+        if lif in uploadfile:
             race = getrace(imported[0])
             race.put()
             #remove the race from the list
@@ -110,7 +119,7 @@ def upload(request):
                 result = getresult(r, race)
                 result.put()
                 
-        elif len(imported[0]) == 5:
+        elif evt in uploadfile:
                 for r in imported:
                     if len(r[0]) > 0:
                         race = getrace(r)

@@ -44,7 +44,28 @@ class Results(db.Model):
 	finalTime = db.StringProperty()
 	deltaTime = db.StringProperty()
 	splitDetails = db.StringProperty()
+	time = db.TimeProperty()
 	race = db.ReferenceProperty(Race, required=True)
+	
+	def put(self):
+		db.Model.put(self)
+		if self.finalTime is not None:
+			from datetime import time
+			str = self.finalTime.split(":")
+	        if len(str) == 1:
+	            s = str[0].split(".")
+	            t = time(second=int(s[0]), microsecond=(int(s[1]) * 1000))
+	            pass
+	        elif len(str) == 2:
+	            s = str[1].split(".")
+	            t = time(minute=int(str[0]), second=int(s[0]), microsecond=(int(s[1]) * 1000))
+	        elif len(str) == 3:
+	            s = str[2].split(".")
+	            t = time(hour=int(str[0]), minute=int(str[1]), second=int(s[0]), microsecond=(int(s[1]) * 1000))
+	        
+        	self.time = t
+        	db.Model.put(self)
+        
 	
 	def __unicode__(self):
 		return 'p:%s. , n:%s , c:%s , t:%s' % (self.place, self.lastName, self.countryCode, self.finalTime)

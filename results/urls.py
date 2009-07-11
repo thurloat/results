@@ -14,4 +14,5 @@ urlpatterns = patterns('results.views',
 	(r'^details/(?P<key>.+)$', 'show_results'),
 	(r'^delete$', 'cleardata'),
 	(r'^upload/$', 'upload'),
+	(r'^cron/$', 'buildleaders'),
 )

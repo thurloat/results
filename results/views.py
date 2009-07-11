@@ -23,14 +23,24 @@ messages = []
 from results.models import Race, Results
 
 def show_races(request):
-    return object_list(request,Race.all().order("raceNumber"))
+    leaders = Results.all().order("time").fetch(5)
+    return object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
 
 def ajax(request):
     data = memcache.get('raceshtml');
     if data is not None:
         return data
+#    races = Race.all().order('-roundNumber').fetch(1)
+#    r = races.pop(0)
+#    races = Race.gql("where roundNumber = :1", r.roundNumber) #Race.all().filter("roundNumber = :1", r.roundNumber)
+#    raceslist = []
+#    for race in races:
+#        raceslist.append(race.key())
+#    
+#    leaders = Results.gql("where race IN :1 order by time", raceslist).fetch(5)
     
-    data = object_list(request,Race.all().order("raceNumber"), template_name="list.html")
+    leaders = Results.all().order("time").fetch(5)
+    data = object_list(request,Race.all().order("raceNumber"), template_name="list.html", extra_context={'leaders':leaders})
     memcache.add("raceshtml", data)
     return data
     
@@ -41,9 +51,17 @@ def show_result(request, key):
 def show_results(request, key):
     race = Race.get(key)
     return object_list(request,queryset=Results.all().filter("race =", race).order("place"), extra_context={'race':race})
+
+def buildleaders(request):
+    from datetime import time
+    r = Results.all()
+    for result in r:
+        result.put()
+            
     
 def cleardata(request):
     messages = []
+    memcache.delete("raceshtml")
     if request.method == 'POST':
         existing = Race.all()
         db.delete(existing)
@@ -102,6 +120,7 @@ def getresult(field, race):
 
 def upload(request):
     if request.method == 'POST':
+        memcache.delete("raceshtml")
         import re
         import os
         file = request.FILES['lif']

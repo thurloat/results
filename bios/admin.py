@@ -15,5 +15,7 @@ class AthleteInline(admin.TabularInline):
 class BioAdmin(admin.ModelAdmin):
 	inlines = (AthleteInline,)
 	
-admin.site.register(Team,BioAdmin)
+
 admin.site.register(Country)
+admin.site.register(Team,BioAdmin)
+admin.site.register(Athlete)

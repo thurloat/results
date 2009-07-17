@@ -14,7 +14,6 @@ class mobile(object):
         p = re.compile('mobile', re.IGNORECASE)
         if p.search(self.normal_templates[0]):
             self.normal_templates = (self.normal_templates[1],) + self.normal_templates
-        
         self.iphone_templates = (self.normal_templates[0] + '/mobile',) + self.normal_templates
 
     def process_request(self, request):

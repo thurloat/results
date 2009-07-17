@@ -1,10 +1,19 @@
-<ul id="countries" title="Events" selected="true">
-	<li class="group">Countries</li>
-	<li><a href="#can">Belarus</a></li>
-	<li><a href="#can">Canada</a></li>
-	<li><a href="#can">Mexico</a></li>
-	<li><a href="#can">USA</a></li>
-	<li><a href="#can">Zimbabwe</a></li>
+<ul id="events" title="Events" selected="true">
+	<li class="group">THURS August 13</li>
+	<li>
+		<a href="#evt1" class="clock">8</a>
+		<a href="#evt1" class="evt_title">
+			Matt Mays (music) free <br />
+			<span class="addr">Mainstage Lake Banook</span>
+		</a>
+	</li>
+	<li>
+		<a href="#asdf" class="clock">10</a>
+		<a href="#asdf" class="evt_title">Buskers (var) donation<br />
+		<span class="addr">Festival Grounds</span>
+		</a>
+	</li>
+	<li class="group">FRI August 14</li>
 </ul>
 <ul id="evt1" title="Event 1">
 	<li>

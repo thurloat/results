@@ -101,10 +101,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'appenginepatcher',
-	'results',
+    'results',
     'registration',
     'mediautils',
-	'bios',
+    'bios',
+    'events',
+    'myapp',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

@@ -10,6 +10,29 @@ from django.db.models import permalink, signals
 from google.appengine.ext import db
 from ragendja.dbutils import cleanup_relations
 
+class EventClass(db.Model):
+	description = db.StringProperty()
+	shortHand = db.StringProperty()
+	
+	def __unicode__(self): return self.shortHand
+
+class EventDistance(db.Model):
+	distance = db.StringProperty()
+	
+	def __unicode__(self): return self.distance
+	
+class EventGender(db.Model):
+	gender = db.StringProperty()
+	
+	def __unicode__(self): return self.gender
+
+class Event(db.Model):
+	eventClass = db.ReferenceProperty(EventClass)
+	distance = db.ReferenceProperty(EventDistance)
+	gender = db.ReferenceProperty(EventGender)
+	
+	def __unicode__(self): return '%s - %s - %s' % (self.eventClass,self.distance,self.gender)
+
 class Race(db.Model):
 	raceNumber = db.IntegerProperty()
 	roundNumber = db.StringProperty()

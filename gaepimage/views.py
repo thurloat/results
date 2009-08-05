@@ -17,14 +17,19 @@ from mimetypes import guess_type
 from ragendja.dbutils import get_object_or_404
 from ragendja.template import render_to_response
 
-from events.models import Event
+from gaepimage.models import Image
 
-def list_latest(request):
-	return object_list(request,Event.all())
-def event_detail(request, id):
-    return object_detail(request,Event.all(),slug_field="eventNumber",slug=int(id), template_name="mobile-eventDetail.html", template_object_name = "event")
-def image_view(request, id):
-    event = Event.all().filter("eventNumber =",int(id)).get()
+def inrto(request):
+    return "Introduction Goes Here"
+def render_image(request, model, property, id):
+    print request
+    print model
+    print property
+    print id
+    
+    q = db.GqlQuery("SELECT * FROM  WHERE __key__ = 'agdjYW5vZTA5chILEgxldmVudHNfZXZlbnQYAQw'").fetch(1)
+    return q  
+    event = Image.all()
     if event and event.image: 
         response = HttpResponse()
         response['Content-Type'] = 'image/png'

@@ -107,6 +107,7 @@ INSTALLED_APPS = (
     'bios',
     'events',
     'myapp',
+    # 'gaepimage',
 )
 
 # List apps which should be left out from app settings and urlsauto loading

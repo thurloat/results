@@ -34,18 +34,17 @@ class Country(db.Model):
 		return super(Country,self).delete()
 
 class Athlete(db.Model):
-	athleteNumber = db.IntegerProperty()
+	bibNum = db.IntegerProperty()
 	firstName = db.StringProperty()
 	lastName = db.StringProperty()
 	birthDate = db.DateProperty()
 	homeTown = db.StringProperty()
 	coach = db.StringProperty()
 	picture = db.BlobProperty()
-	events = KeyListProperty(Event)
 	country = db.ReferenceProperty(Country)
 		
 	def __unicode__(self):
-		return '%s. %s %s, %s' % (self.athleteNumber, self.firstName, self.lastName, self.country)
+		return '%s. %s %s, %s' % (self.bibNum, self.firstName, self.lastName, self.country)
 	
 	def __json__(self):
 		return '%s %s' % (self.lastName, self.firstName)
@@ -53,33 +52,29 @@ class Athlete(db.Model):
 	@permalink
 	def get_absolute_url(self):
 		return ('bios.views.show_athlete', (), {'key': self.key()})
+	
+	def get_crews(self):
+		return Crew.gql('WHERE athletes = :ai', ai = self.key()).fetch(5)
 
-########################################################
-#Teams Are Deprecated
-########################################################
-"""
-class Team(db.Model):
-	teamNumber = db.IntegerProperty()
-	country = db.ReferenceProperty(Country, required=True)
+class Crew(db.Model):
+	crewNum = db.IntegerProperty()
+	country = db.ReferenceProperty(Country, collection_name = "crew_country")
 	event = db.ReferenceProperty(Event)
-	members = KeyListProperty(Athlete)
-	name = db.StringProperty()
+	athletes = ReferenceListProperty(Athlete)
+	
+	def prefetch_athlete_data(self):
+		print self.athletes
+		athletes = [db.get(k) for k in self.athletes]
+		print athletes
+		self.athletes = athletes
+		print self.athletes
 	
 	def __unicode__(self):
-		return '%s. %s - %s' % (self.teamNumber, self.name, self.country)
-			
-	@permalink
-	def get_absolute_url(self):
-		return ('bios.views.show_team', (), {'key': self.key()})
+		return '%s, %s. %s' % (self.country.code, self.crewNum, self.event)
 	
-	def put(self):
-		memcache.delete("biosHtml")
-		return super(Team,self).put()
-	def delete(self):
-		memcache.delete("biosHtml")
-		return super(Team,self).delete()
 	
-class TeamMember(db.Model):
-	team = db.ReferenceProperty(Team)
-	athlete = db.ReferenceProperty(Athlete)
-"""
+	
+########################################################
+#Teams Are Now Crews
+########################################################
+

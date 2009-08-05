@@ -488,3 +488,11 @@ class ReferenceListProperty(db.Property):
             self.collection_name,
             _ReverseReferenceProperty(model_class, property_name))
     
+
+  def get_form_field(self, **kwargs):
+    from django import forms
+    defaults = {'form_class': forms.ModelMultipleChoiceField,
+            'queryset': self.reference_class.all(),
+            'required': False}
+    defaults.update(kwargs)
+    return super(ReferenceListProperty, self).get_form_field(**defaults)

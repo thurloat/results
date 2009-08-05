@@ -14,19 +14,20 @@ from django.views.generic.create_update import create_object, delete_object, \
     update_object
 from google.appengine.ext import db
 from mimetypes import guess_type
-from ragendja.dbutils import get_object_or_404
+from ragendja.dbutils import get_object_or_404, prefetch_references
 from ragendja.template import render_to_response
 from google.appengine.api import memcache
 
-from bios.models import Team, Country, Athlete
+from bios.models import Crew, Country, Athlete
+from results.models import Event
 
 def show_bios_overview_mobile(request):
     data = memcache.get('biosHtml');
-    if data is not None:
-        return data
+    #if data is not None:
+     #   return data
     countryList = Country.all()
-    data = object_list(request,Team.all(), template_name="mobile-bioOverview.html", extra_context={'countries':countryList})
-    memcache.add("biosHtml", data)
+    data = object_list(request,Event.all(), template_name="mobile-bioOverview.html", extra_context={'countries':countryList})
+    #memcache.add("biosHtml", data)
     return data
 
 def show_athletes_all_country(request, country):
@@ -35,22 +36,33 @@ def show_athletes_all_country(request, country):
     data = object_list(request,Athlete.all().filter("country =",selectedCountry), template_name="mobile-bioAthleteList.html", extra_context={'country':selectedCountry})
     return data
 
+def show_athletes_country_crew(request, country, crewNum):
+    selectedCountry = Country.gql("WHERE code = :cc", cc=country).get()
+    return object_detail(request,Crew.all(),slug_field="crewNum",slug=long(crewNum), template_name="mobile-bioCrew.html", template_object_name = "crew", extra_context={'country':selectedCountry})
+
 def show_athlete(request, identifier):
-    return object_detail(request,Athlete.all(),slug_field="athleteNumber",slug=long(identifier), template_name="mobile-bioAthleteDetail.html", template_object_name = "athlete")
+    athlete = Athlete.all().filter("bibNum =",int(identifier)).get()
+    crews = athlete.get_crews()
+    return object_detail(request,Athlete.all(),slug_field="bibNum",slug=long(identifier), template_name="mobile-bioAthleteDetail.html", template_object_name = "athlete", extra_context={'crews':crews})
 
 def show_athletes(request):
 	return object_list(request,Athlete.all(),paginate_by = 10)
 
-def show_teams(request):
-	return object_list(request,Team.all())
-def show_team(request, key):
-	team = Team.get(key)
-	return object_list(request,Athlete.gql("WHERE team = :1", team))
-def show_countries(request):
-	return object_list(request,Country.all(),paginate_by = 10)
-def show_athletes_by_team(request,key):
-	country = Country.all().filter("code = :1 LIMIT 1", key)
-	return object_list(request,Team.gql("WHERE country = :1", country))
-def show_athletes_by_country(request, key):
-	country = Country.get(key)
-	return object_list(request, Athlete.gql("WHERE country = :1", country))
+def show_crews(request):
+	return object_list(request,Crew.all())
+    
+def show_crew(request, key):
+	crew = Crew.get(key)
+	return object_list(request,Athlete.gql("WHERE crew = :1", crew))
+    
+def image_view(request, id):
+    athlete = Athlete.all().filter("bibNum =",int(id)).get()
+    print ""
+    print athlete.picture
+    if athlete and athlete.picture: 
+        response = HttpResponse()
+        response['Content-Type'] = 'image/png'
+        response.write(athlete.picture)
+        return response
+    else:
+        raise Http404('Sorry, I couldnt find that image!')

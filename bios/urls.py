@@ -11,8 +11,8 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('bios.views',
 	(r'^$', 'show_bios_overview_mobile'),
+	(r'^img/(?P<id>.+)/$', 'image_view'),
 	(r'^athletes/(?P<country>[A-Z]{3})/$', 'show_athletes_all_country'),
+	(r'^athletes/(?P<country>[A-Z]{3})/(?P<crewNum>.+)/$', 'show_athletes_country_crew'),
 	(r'^athlete/(?P<identifier>.+)/$', 'show_athlete'),
-	(r'^teams$', 'show_teams'),
-	(r'^team/(?P<key>.+)$', 'show_team'),
 )

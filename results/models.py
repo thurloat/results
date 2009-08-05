@@ -27,6 +27,7 @@ class EventGender(db.Model):
 	def __unicode__(self): return self.gender
 
 class Event(db.Model):
+	eventNumber = db.IntegerProperty()
 	eventClass = db.ReferenceProperty(EventClass)
 	distance = db.ReferenceProperty(EventDistance)
 	gender = db.ReferenceProperty(EventGender)
@@ -59,7 +60,7 @@ class Race(db.Model):
 
 class Results(db.Model):
 	place = db.IntegerProperty()
-	athleteNumber = db.StringProperty()
+	athleteNum = db.StringProperty()
 	laneNumber = db.StringProperty()
 	lastName = db.StringProperty()
 	firstName = db.StringProperty()

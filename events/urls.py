@@ -11,4 +11,6 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('events.views',
 	(r'^$', 'list_latest'),
+	(r'^img/(?P<id>.+)/$', 'image_view'),
+	(r'(?P<id>.+)/$', 'event_detail'),
 )

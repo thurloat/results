@@ -8,21 +8,15 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 """
 
 from django.contrib import admin
-from bios.models import Athlete, Country
+from bios.models import Athlete, Country, Crew
 
 
-#class TeamMemberInline(admin.TabularInline):
-#	model = TeamMember
+
 class AthleteInline(admin.TabularInline):
 	model = Athlete
-#class TeamInline(admin.TabularInline):
-#	model = Team
-#class TeamAdmin(admin.ModelAdmin):
-#	inlines = (TeamMemberInline,)
 
 class AthleteAdmin(admin.ModelAdmin):
 	inlines = (AthleteInline,)
 
 admin.site.register(Country, AthleteAdmin)
-
-#admin.site.register(Team, TeamAdmin)
+admin.site.register(Crew)

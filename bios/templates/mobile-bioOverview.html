@@ -1,0 +1,19 @@
+<ul id="countries" title="Bios" selected="true">
+<li class="group">Countries</li>
+{% for country in countries %}
+<li><a href="#{{ country.code }}">{{ country.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% for country in countries %}
+<ul id="{{ country.code }}">
+	<li class="group">{{ country.code }}</li>
+	<li><a href="/bio/athletes/{{ country.code }}">All Athletes</a></li>
+	<li><a href="/bio/athletes/{{ country.code }}">All Staff</a></li>
+	<li class="group">Athletes by Event</li>
+	{% for crew in country.crew_country %}
+		<li><a href="/bio/athletes/{{ country.code }}/{{ crew.crewNum }}/">{{ crew }}</a></li>
+	{% endfor %}
+</ul>
+{% endfor %}

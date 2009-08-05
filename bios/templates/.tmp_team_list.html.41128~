@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Team listing{% endblock %}
+{% block content %}
+<ul>
+	<h1>Teams!</h1>
+	 {% for team in object_list %}
+	<li>
+		<a href="{% url bios.views.show_team key=team.key %}">{{ team.teamNumber }}. {{ team.name }} - {{ team.country }}</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

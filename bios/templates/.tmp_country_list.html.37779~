@@ -1,0 +1,15 @@
+<ul id="countries" title="Events" selected="true">
+	<li class="group">Countries</li>
+	<li><a href="#can">Belarus</a></li>
+	<li><a href="#can">Canada</a></li>
+	<li><a href="#can">Mexico</a></li>
+	<li><a href="#can">USA</a></li>
+	<li><a href="#can">Zimbabwe</a></li>
+</ul>
+<ul id="can" title="Event 1">
+	<li class="group">Team Canada</li>
+	<li><a href="bio/athletes/can">All Athletes</a></li>
+	<li><a href="bio/athletes/team/1">Women's K-1 500m</a>
+	<li><a href="bio/athletes/team/2">Men's K4 - 2000m</a></li>
+	<li><a href="#countries">Back to countries</a></li>
+</ul>

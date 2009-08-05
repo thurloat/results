@@ -1,0 +1,6 @@
+<ul id="athletes" title="Bios" selected="true">
+<li class="group">{{ country.name }}</li>
+{% for athlete in object_list %}
+<li><a href="/bio/athlete/{{ athlete.athleteNumber }}">{{ athlete }}</a></li>
+{% endfor %}
+</ul>

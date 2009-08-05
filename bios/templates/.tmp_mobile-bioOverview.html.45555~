@@ -1,0 +1,34 @@
+<ul id="countries" title="Bios" selected="true">
+<li class="group">Countries</li>
+{% for country in countries %}
+<li><a href="#{{ country.code }}">{{ country.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% for country in countries %}
+<ul id="{{ country.code }}">
+	<li class="group">{{ country.code }}</li>
+	<li><a href="/bio/athletes/{{ country.code }}">All Athletes</a></li>
+	<li><a href="/bio/athletes/{{ country.code }}">All Staff</a></li>
+	<li class="group">Athletes by Event</li>
+	{% for event in object_list %}
+		<li><a href="/bio/athletes/{{ country.code }}/{{ event.eventNumber }}">{{ event }}</a></li>
+	{% endfor %}
+</ul>
+{% endfor %}
+
+{% comment %}
+{% regroup object_list|dictsort:"country" by country as country_list %}
+{% for country in country_list %}
+<ul id="{{ country.grouper }}">
+	<li class="group">{{ country.grouper }}</li>
+	<li><a href="/bio/athletes/{{ country.grouper }}">All Athletes</a></li>
+	<li class="group">Athletes by Event</li>
+	{% for item in country.list %}
+	<li><a href="/bio/athletes/{{ country.grouper }}">{{ item.name }}</a></li>
+	{% endfor %}
+	<li><a href="#countries">Back To Countries</a></li>
+</ul>
+{% endfor %}
+{% endcomment %}

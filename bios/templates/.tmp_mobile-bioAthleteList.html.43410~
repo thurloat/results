@@ -1,0 +1,7 @@
+<ul id="athletes" title="Bios" selected="true">
+<li class="group">{{ country.name }}{% if event %} - {{ event }}{% endif %}</li>
+
+{% for athlete in object_list %}
+<li><a href="/bio/athlete/{{ athlete.bibNum }}">{{ athlete }}</a></li>
+{% endfor %}
+</ul>

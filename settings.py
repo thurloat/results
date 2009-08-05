@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'ragendja.middleware.LoginRequiredMiddleware',
-    'results.middleware.mobile',
+    'norex.middleware.mobile',
 )
 
 # Google authentication

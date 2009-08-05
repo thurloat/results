@@ -1,6 +1,7 @@
 from django.conf import settings
 import re
 
+
 class mobile(object):
     """
     If the Middleware detects an iPhone/iPod the template dir changes to the

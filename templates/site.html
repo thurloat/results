@@ -3,71 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Manulife Dragon Boat Festival</title>
-<link media="screen" type="text/css" href="/css/core.css" rel="stylesheet"/>
-<link media="handheld" type="text/css" href="/css/antiscreen.css" rel="stylesheet"/>
-<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0;" />
-<script src="/js/XMLHttpRequest.js"></script>
+<title>Canoe 09</title>
 </head>
 <body>
 
-<div id="outer">
-	<div id="container">
-		<div id="outertop">
-			<img src="/images/boxed.TL.gif" class="left" />
-			<img src="/images/boxed.TR.gif" class="right" />
-		</div>
-		
-		<div id="header">
-			<img src="/images/dragonboat-logo.png" />
-		</div>
-		
-		<div id="content">
-			<div id="leftCol">
-				<img id="sponsorbanner" src="/images/sponsorbanner.jpg" />
-				
-				
-				{% block content %}
-				{% endblock %}
-				
-				{% if messages %}
-          {% for message in messages %}
-            <div class="info">{{ message }}</div>
-          {% endfor %}
-        {% endif %}
-			</div>
-			
-			<div id="rightCol">
-			<p>The Manulife Dragon Boat Festival is an organized Fundraiser in support of the Nova Scotia Amateur Sport Fund. 
-			Teams of 20 people, plus a drummer,  paddle Dragon Boats down the lake in a series of fun and friendly races. 
-			Dragon boats are very stable, and the races only last a minute or two, making it a perfect event for everyone - 
-			even a team of beginners!</p>
-			
-			<p>This year's event will take place on Saturday, July 11, 2009 on Lake Banook in Dartmouth, Nova Scotia, from 
-			9:00a.m.-4:00p.m.  We look forward to seeing you there!</p>
-			</div>
-		
-		</div>
-		<div style="clear: both;"></div>
-		<div id="footer">
-		<img src="/images/boxed.BL.gif" class="left" />
-			<img src="/images/boxed.BR.gif" class="right" />
-		</div>
-	</div>
-</div>
-
+{% block content %}
+{% endblock %}
 </body>
 
-<script type="text/javascript">
-			var mode = 0;
-			window.onresize = function () {
-				if (mode == 0) {
-					document.getElementById("viewport").setAttribute("content", "width=480;", false);
-					mode = 1;
-				} else {
-					document.getElementById("viewport").setAttribute("content", "width=320;", false);
-					mode = 0;
-				}
-			};
-		</script> 
 </html>

@@ -27,9 +27,6 @@ def show_races(request):
     return object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
 
 def ajax(request):
-    data = memcache.get('raceshtml');
-    if data is not None:
-        return data
 #    races = Race.all().order('-roundNumber').fetch(1)
 #    r = races.pop(0)
 #    races = Race.gql("where roundNumber = :1", r.roundNumber) #Race.all().filter("roundNumber = :1", r.roundNumber)
@@ -41,7 +38,6 @@ def ajax(request):
     
     leaders = Results.all().order("time").fetch(5)
     data = object_list(request,Race.all().order("raceNumber"), template_name="list.html", extra_context={'leaders':leaders})
-    memcache.add("raceshtml", data)
     return data
     
 def show_race(request, key):

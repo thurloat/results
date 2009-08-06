@@ -1,17 +1,26 @@
+{% extends 'site.html' %}
+{% block content %}
+
 {% regroup object_list|dictsort:"date" by date as date_list %}
+
+<div class="icf">
+
+<h1>Events List</h1>
+
 <ul id="events" title="Events" selected="true">
 {% for date in date_list %}
-	<li class="group">{{ date.grouper|date:"D F d" }}</li>
+	<li class="group"><h3>{{ date.grouper|date:"l F jS" }}</h3></li>
 	{% for event in date.list %}
 	<li>
-		<a href="/events/{{ event.eventNumber }}" class="clock">{{ event.time|time:"H" }}</a>
-		<a href="/events/{{ event.eventNumber }}" class="evt_title">
-			{{ event.title }}<br />
-			<span class="addr">{{ event.location }}</span>
-		</a>
+		<a href="/events/{{ event.eventNumber }}" class="clock">{{ event.time|time }}</a> | 
+		<a href="/events/{{ event.eventNumber }}" class="evt_title">{{ event.title }}</a> |
+		<a href="/events/{{ event.eventNumber }}" class="evt_title"><span class="addr">{{ event.location }}</span></a>
+		<br />
+		{{ event.description }}
 	</li>
 	{% endfor %}
 {% endfor %}
 </ul>
 
-
+</div>
+{% endblock %}

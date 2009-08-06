@@ -283,6 +283,16 @@ ul#eventDays li.currentDay a:hover {
 color:#fff;
 }
 
+ul#events, ul#events li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul#events {
+	margin: 25px 0 0 0 ;
+}
+
 form.bioSearch {
 padding:0!important;
 margin:0 0 5px 0!important;

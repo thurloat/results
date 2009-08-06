@@ -1,3 +1,6 @@
+{% extends 'site.html' %}
+{% block content %}
+
 <ul id="evt1" title="Event 1">
 	<li>{{ event.title }}</li>
 	<li>
@@ -11,3 +14,5 @@
 	<li>Place: {{ event.location }}</li>
 	<li><a href="/events">Back to listing</a></li>
 </ul>
+
+{% endblock %}

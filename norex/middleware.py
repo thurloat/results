@@ -22,9 +22,9 @@ class mobile(object):
         self.mobile_templates = (self.normal_templates[0] + '/mobile',) + self.normal_templates
 
     def process_request(self, request):
-        print ""
-        test = template.get_app_dirs('templates/iphone')
-        print test
+        # ""
+        #test = template.get_app_dirs('templates/iphone')
+        #print test
         #p = re.compile('iPhone|iPod|BlackBerry|Android|Nokia|webOS', re.IGNORECASE)
         p = re.compile('iPhone|iPod|Android|webOS', re.IGNORECASE)
         if p.search(request.META['HTTP_USER_AGENT']):

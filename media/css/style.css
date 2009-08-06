@@ -1,68 +1,369 @@
-*{
-border:0;
+* {
+font-family:Helvetica, Arial, sans-serif;
+}
+
+body {
+background-image:url(/images/bg.png);
+background-repeat:repeat-x;
+background-color:#666;
+padding:10px 0 0;
+margin:0;
+}
+
+div#container {
+width:980px;
+margin:0 auto!important;
+}
+
+div#logo {
+width:208px;
+height:300px;
+background:url(/images/glass.png);
+background-repeat:repeat;
+border:1px solid #cacaca;
+float:left;
+margin:0 10px 0 0;
+}
+
+div#logo img {
+padding:15px 0 0 20px;
+}
+
+img, img a, a img {
+border:none;
+}
+
+div#banner {
+width:760px;
+height:302px;
+float:left;
+}
+
+div#nav {
+width:208px;
+height:245px;
+background:url(/images/glass.png);
+background-repeat:repeat;
+border:1px solid #cacaca;
+float:left;
+margin:10px 10px 0 0;
+}
+
+div#norex {
+width:208px;
+height:270px;
+background:url(/images/glass.png);
+background-repeat:repeat;
+border:1px solid #cacaca;
+float:left;
+clear:left;
+margin:10px 10px 0 0;
+}
+
+div#norex img {
+margin:15px 0 0 20px;
+border-bottom:1px solid #aaa8a8;
+padding:0 0 10px 0;
+}
+
+div#norex p {
+color:#fff;
+font-size:12px;
+font-family:Helvetica, Arial, sans-serif;
+line-height:17px;
+width:160px;
+margin:0 0 0 27px;
+padding:15px 0 0 0;
+}
+
+div#nav ul {
+list-style:none;
+padding:0;
+margin:2px 0 0 19px;
+}
+
+div#nav ul li {
+width:170px;
+height:46px;
+float:left;
+clear:left;
 padding:0;
 margin:0;
 }
-div#countdownWrapper{
-height:176px;
-width:213px;
-background-image:url('../images/manulife-website-background.jpg');
-}
-div#countdown{
-position:relative;
-top:91px;
-left:6px;
-width:200px;
-height:80px;
+
+div#nav ul li.menuDivider {
+width:170px!important;
+height:2px!important;
+float:left;
+clear:left;
+background-image:url(/images/div.png);
+background-repeat:no-repeat;
 }
 
-div.numberHolder{
-width:48px;
-height: 56px;
+div#nav ul li a {
+text-decoration:none;
+display:block;
+width:170px;
+height:46px;
 float:left;
 }
-div.number{
-width:24px;
-height:55px;
+
+div#nav ul li a:hover {
+background-position:0 -46px!important;
+}
+
+div#nav ul li#homeBtn a {
+background-image:url(/images/homeBtn.png);
+}
+
+div#nav ul li#resultBtn a {
+background-image:url(/images/resultBtn.png);
+}
+
+div#nav ul li#eventsBtn a {
+background-image:url(/images/eventsBtn.png);
+}
+
+div#nav ul li#biosBtn a {
+background-image:url(/images/biosBtn.png);
+}
+
+div#nav ul li#helpBtn a {
+background-image:url(/images/helpBtn.png);
+}
+
+div#footer {
+width:760px;
+float:right;
+text-align:right;
+color:#fff;
+font-size:12px;
+font-family:Helvetica, Arial, sans-serif;
+padding:10px 0 0 0;
+}
+
+div#content {
+width:738px;
+float:left;
+background-image:url(/images/watermark_icf.png)!important;
+background-repeat:no-repeat;
+background-position:left 15px;
+background-color:#fff;
+margin:11px 0 11px 10px;
+}
+
+div#contentInner {
+width:690px;
+float:left;
+padding:20px 0 20px 20px;
+}
+
+div#leftCol {
 float:left;
 }
-div.wider{
-width:72px;
-}
-div.n0{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/0_06.jpg');
-}
-div.n1{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/1_06.jpg');
-}
-div.n2{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/2_06.jpg');
-}
-div.n3{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/3_06.jpg');
-}
-div.n4{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/4_06.jpg');
-}
-div.n5{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/5_06.jpg');
-}
-div.n6{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/6_06.jpg');
-}
-div.n7{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/7_06.jpg');
-}
-div.n8{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/8_06.jpg');
-}
-div.n9{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/9_06.jpg');
+
+div#rightCol {
+width:758px;
+float:left;
+background:url(/images/glass.png);
+background-repeat:repeat;
+border:1px solid #cacaca;
+margin:10px 0 0 0;
 }
 
-div.colon{
-background-image:url('http://sportnovascotia.ca/dbcountdown/images/colon_06.jpg');
-width:10px;
-margin: 2px;
+h1 {
+padding:0;
+margin:0;
+font-family:Helvetica, Arial, sans-serif;
+color:#b4161d;
+font-weight:100;
+font-size:21px;
 }
 
+p {
+padding:0;
+margin:0;
+font-family:Helvetica, Arial, sans-serif;
+line-height:19px;
+font-size:12px;
+color:#797979;
+}
+
+/*RESULTS*/
+
+table#results, table#results td {
+border:none;
+border-collapse:collapse;
+}
+
+table#results th {
+padding-right:10px;
+padding-left:8px;
+font-weight:100;
+color:#666;
+text-align:center;
+font-size:14px;
+}
+
+h2 span {
+color:#666;
+}
+
+table#results td {
+color:#666;
+padding:5px;
+text-align:center;
+font-size:12px;
+}
+
+ul.raceEvents {
+list-style:none;
+border-bottom:1px solid #ccc;
+padding-bottom:10px;
+}
+
+ul li.pastEvent a {
+color:#999;
+}
+
+ul li.pastEvent a:hover {
+color:#000;
+text-decoration:none;
+}
+
+ul li.upcomingEvent a {
+color:#000;
+}
+
+ul li.upcomingEvent a:hover {
+color:#b7171e;
+text-decoration:none;
+}
+
+ul#eventDays {
+list-style:none;
+padding:0;
+margin:0;
+}
+
+ul#eventDays li {
+float:left;
+width:21px;
+height:21px;
+padding:0;
+margin:0 5px 0 0;
+}
+
+ul#eventDays li a {
+display:block;
+width:21px;
+height:19px;
+color:#fff;
+font-weight:700;
+background-image:url(/images/dayBg.jpg);
+background-repeat:no-repeat;
+overflow:hidden;
+font-family:Helvetica, Arial, sans-serif;
+letter-spacing:-1px;
+font-size:14px;
+padding:2px 0 0 3px;
+}
+
+ul#eventDays li a:hover {
+background-position:0 -21px;
+text-decoration:none;
+}
+
+ul#eventDays li.currentDay a {
+background-position:0 -21px;
+color:#fff;
+}
+
+ul#eventDays li.currentDay a:hover {
+color:#fff;
+}
+
+form.bioSearch {
+padding:0!important;
+margin:0 0 5px 0!important;
+float:left;
+clear:left;
+}
+
+table.athleteBio {
+float:left;
+width:230px;
+border-right:1px solid #ccc;
+border-bottom:1px solid #ccc;
+padding:5px 0 5px 5px;
+margin:5px 0 5px 5px;
+}
+
+table.athleteBio ul {
+padding:0;
+margin:0;
+list-style:none;
+}
+
+table.athleteBio ul.athleteEvents li a {
+font-size:11px;
+color:#666;
+text-decoration:none;
+}
+
+table.athleteBio ul.athleteEvents li a:hover {
+text-decoration:none;
+color:#b7171e;
+}
+
+table.athleteBio ul li.athleteName {
+font-weight:700;
+color:#b7171e;
+}
+
+div.eventsHolder {
+width:240px;
+float:left;
+margin-right:50px;
+padding-bottom:30px;
+text-align:center;
+}
+
+ul.festivalEvent {
+padding:0;
+margin:0;
+list-style:none;
+padding:15px 0 15px 0;
+border-bottom:1px solid #ccc;
+width:250px;
+}
+
+ul.festivalEvent li {
+color:#666;
+}
+
+ul.festivalEvent li strong {
+color:#000;
+font-weight:700;
+}
+
+div.icf {
+width:510px;
+padding:0 0 0 190px;
+}
+
+/*CANOE 09 STYLES*/
+
+h1, h2, h3			{clear: left;}
+h1.location			{font: 2.4em/1 bold Geneva, Arial, Helvetica, sans-serif; color: #999;}
+h1.tagline			{font-size: 1.5em; color: #AAA; margin-bottom: 1.2em; margin-top:0.4em;}
+h2					{font: 1.5em/2 bold Geneva, Arial, Helvetica, sans-serif; color: #b7171e;}
+h3					{font: 1.2em/1.4em bold Geneva, Arial, Helvetica, sans-serif; color: #1e4e9c;}
+h3 a				{color:#1e4e9c; text-decoration:none;}
+h3 a:hover			{color:#1e4e9c; text-decoration:underline;}
+h4					{line-height: 2em;}
+h4 a				{text-decoration:underline;}
+p					{margin-bottom: 1.6em;}
+a					{color:#b7171e; text-decoration:none;}
+a:hover				{color:#b7171e; text-decoration:underline;}
+small				{color:#999; font-size:0.9em; margin-bottom:1em; display:block;}

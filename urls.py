@@ -12,9 +12,10 @@ handler500 = 'ragendja.views.server_error'
 
 urlpatterns = auth_patterns + patterns('norex.generic',
     (r'^$',             'UA_direct', {'template': 'homepage.html'}),
+    (r'^help/',         'UA_direct', {'template': 'help.html'}),
 )   + patterns('',
-    ('^admin/(.*)', admin.site.root),
-    (r'^ajax$', 'results.views.ajax'),
+    ('^admin/(.*)',     admin.site.root),
+    (r'^ajax$',         'results.views.ajax'),
     # Override the default registration form
     url(r'^account/register/$', 'registration.views.register',
         kwargs={'form_class': UserRegistrationForm},

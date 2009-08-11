@@ -124,6 +124,17 @@ def getresult(field, race):
 
     return result
 
+def purge_race_data(request):
+    list = Results.all().fetch(1000)
+    db.delete(list)
+    list = Race.all().fetch(1000)
+    db.delete(list)
+    list = Event.all().fetch(1000)
+    db.delete(list)
+    
+    return UA_direct(request,'race-upload.html')
+    
+
 def race_upload(request):
     if request.method == 'POST':
         import re
@@ -153,12 +164,12 @@ def race_upload(request):
                     
                 #does this event already exist?
                 evtest = Event.all().filter("eventString =",r[0]).fetch(1)
-                print evtest
+                #print evtest
                 if len(evtest) > 0:
                     selectedEvent = evtest[0]
-                    print "re-using event"
+                    #print "re-using event"
                 else:
-                    print "making new event"
+                    #print "making new event"
                     eventInfo = [x.strip() for x in r[0].split('-')]
                     event = Event()
                     event.eventClass=eventInfo[0]
@@ -169,15 +180,21 @@ def race_upload(request):
                     selectedEvent = event
                 
             if selectedRace is not None and (selectedRace.event != selectedEvent or selectedRace.heatNumber != r[1]) or selectedRace is None:         
-                print "making new race"
-                race = Race()
-                race.event = selectedEvent
-                race.heatNumber = r[1]
-                race.hasResults = False
-                race.put()
+                #print "making new race"
+                #check and re-use old races.
+                ractest = Race.all().filter("event =",selectedEvent).filter("heatNumber =",r[1]).fetch(1)
+                if len(ractest) > 0:
+                    selectedRace = ractest[0]
+                else:
                 
-                selectedRace = race
-            print r   
+                    race = Race()
+                    race.event = selectedEvent
+                    race.heatNumber = r[1]
+                    race.hasResults = False
+                    race.put()
+                    
+                    selectedRace = race
+           
             
             result = Results()
             
@@ -188,7 +205,7 @@ def race_upload(request):
             result.country = selc[0] if len(selc)>0 else None
             result.race = selectedRace
             result.put()
-            print result
+            #print result
             #print r
     return UA_direct(request, 'results/race-upload.html')
 

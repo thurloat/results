@@ -10,12 +10,13 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('results.views',
-	(r'^$', 'show_events'),
+	(r'^$',                    'show_events'),
 	(r'^races/(?P<event>.+)$', 'show_races_event'),
-	(r'^detail/(?P<key>.+)$', 'show_result'),
+	(r'^detail/(?P<key>.+)$',  'show_result'),
 	(r'^details/(?P<key>.+)$', 'show_results'),
-	(r'^delete$', 'cleardata'),
-	(r'^upload/$', 'upload'),
-	(r'^cron/$', 'buildleaders'),
-	(r'^raceupload/$','race_upload'),
+	(r'^delete$',              'cleardata'),
+	(r'^upload/$',             'upload'),
+	(r'^cron/$',               'buildleaders'),
+	(r'^raceupload/$',         'race_upload'),
+	(r'^purge/$',              'purge_race_data'),
 )

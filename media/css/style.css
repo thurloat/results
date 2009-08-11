@@ -377,3 +377,96 @@ p					{margin-bottom: 1.6em;}
 a					{color:#b7171e; text-decoration:none;}
 a:hover				{color:#b7171e; text-decoration:underline;}
 small				{color:#999; font-size:0.9em; margin-bottom:1em; display:block;}
+
+div#contentInner ul {
+padding:20px 0 0 0;
+margin:0;
+list-style:none;
+}
+
+div#contentInner ul li {
+padding:0;
+margin:0;
+font-family:Helvetica, Arial, sans-serif;
+line-height:19px;
+font-size:12px;
+color:#797979;
+list-style:none;
+}
+
+div#contentInner ul#events li {
+padding:0 0 20px 0;
+}
+
+div#contentInner ul#events li a {
+font-size:14px!important;
+}
+
+div#contentInner ul#events h3 {
+font-size:18px!important;
+}
+div#contentInner ul li ul {
+padding-left:25px;
+}
+
+div#contentInner ul li ul li {
+list-style-type:circle!important;
+}
+ul#athletes {
+list-style:circle!important;
+padding:0 0 0 30px;
+margin:0;
+}
+
+ul#athletes li.group {
+color:#b4161d;
+list-style:none!important;
+font-family:Helvetica, Arial, sans-serif;
+font-size:18px;
+padding:0 0 10px 0;
+margin:0 0 0 -30px;
+}
+
+ul#athletes li {
+line-height:22px;
+}
+
+ul#athletes li a {
+font-family:Helvetica, Arial, sans-serif;
+font-size:12px;
+color:#1e4e9c;
+}
+
+ul#athletes li a:hover {
+color:#b4161d;
+}
+
+ul#AthleteDetail {
+list-style:none;
+padding:10px 0 0 10px;
+margin:0;
+}
+
+ul#AthleteDetail li {
+font-family:Helvetica, Arial, sans-serif;
+color:#797979;
+line-height:21px;
+font-size:12px;
+clear:left;
+}
+
+ul#AthleteDetail li img {
+float:left;
+}
+
+ul#AthleteDetail li div {
+float:left;
+clear:left;
+}
+
+ul#AthleteDetail li.group {
+font-size:18px;
+color:#;
+padding:10px 0 10px 0;
+color:#b4161d;
+}

@@ -24,10 +24,11 @@ from bios.models import Crew, Country, Athlete
 from results.models import Event
 
 def show_bios_overview_mobile(request):
-    data = memcache.get('biosHtml');
+    #memcache.delete("biosHtml")
+    data = memcache.get('biosHtml')
     if data is not None:
         return data
-    countryList = Country.all()
+    countryList = Country.all().order("name")
     data = UA_object_list(request,Event.all(), template_name="mobile-bioOverview.html", extra_context={'countries':countryList})
     memcache.add("biosHtml", data)
     return data
@@ -91,13 +92,13 @@ def bio_upload(request):
         for r in imported:
             if len(r) is 2:
                 name = [x.strip() for x in r[1].split('-')]
-                print name
+                #print name
                 country = Country(name = name[0], code = name[1], countryNumber = ci)
                 ci = ci + 1
                 country.put()
                 selectedCountry = country
             else:
-                print r
+                #print r
                 athlete = Athlete()
                 athlete.bibNum=int(r[0]) if r[0] is not '' else int(81)
                 athlete.firstName=r[1]

@@ -14,7 +14,7 @@ from bios.models import Athlete, Country, Crew
 
 class Event(db.Model):
 	
-	eventClass = db.StringProperty(choices=("C1","C2","C3","C4","K1","K2","K3","K4"))
+	eventClass = db.StringProperty(choices=("C1","C2","C3","C4","K1","K2","K3","K4","Men","Women",))
 	distance = db.StringProperty(choices=("1000","500","200","Relay",))
 	gender = db.StringProperty(choices=("Men","Women","LTATA","LTA","TAA",))
 	eventString = db.StringProperty()

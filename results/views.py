@@ -137,10 +137,11 @@ def purge_race_data(request):
 
 def race_upload(request):
     if request.method == 'POST':
+        errmsg = None
         import re
         import os
         
-        from bios.models import Country, Athlete
+        from bios.models import Country, Athlete, Crew
         file = request.FILES['csv']
         uploadfile=file.name; 
         
@@ -161,7 +162,7 @@ def race_upload(request):
         selectedEvent = None
         selectedRace = None
         for r in imported:
-            try:
+            #try:
                 if selectedEvent is not None and selectedEvent.eventString != r[0] or selectedEvent is None:
                     #does this event already exist?
                     evtest = Event.all().filter("eventString =",r[0]).fetch(1)
@@ -196,40 +197,63 @@ def race_upload(request):
                         
                         selectedRace = race
                 
+                
+                #athelte or crew?
+                athcrew = None
                 if len(r) > 6 and r[6] != '':
-                    #print "bigger row"
-                        """
-                            it's a crew@@
-                        """
-                        print "2 man crew"
-                        print "%s %s" % (r[5], r[6])
                         if len(r) >8 and r[7] != '':
                             """
                                 it's a 4 man crew
                             """
-                            print "4 man crew"
-                            print "%s %s %s %s" % (r[5],r[6],r[7],r[8])    
+                            fourteam = Athlete.all().filter("bibNum IN",[int(r[5]),int(r[6]),int(r[7]),int(r[8])]).fetch(4)
+                            
+                            crew = Crew()
+                            crew.athletes = fourteam
+                            crew.put()
+                            athcrew = crew
+                        else:
+                            """
+                                it's a crew@@
+                            """
+                            #crew = Crew()
+                            
+                            twoteam = Athlete.all().filter("bibNum IN",[int(r[5]),int(r[6])]).fetch(2)
+                            crew = Crew()
+                            crew.athletes = twoteam
+                            crew.put()                      
+                            athcrew = crew
                 else:
-                    print "single Race"
-                    print r[5]
-                result = Results()
+                    selath = Athlete.all().filter("bibNum =", int(r[5])).fetch(1)
+                    athcrew = selath[0] if len(selath)>0 else None
+
                 
-                selath = Athlete.all().filter("bibNum =", int(r[5])).fetch(1)
-                result.athlete = selath[0] if len(selath)>0 else None
+                result = Results()
+                #print athcrew.__class__.__name__
+
+                if athcrew.__class__.__name__ is "Crew":
+                    #print "its crew"
+                    result.crew = athcrew
+                elif athcrew.__class__.__name__ is "Athlete":
+                    #print "its athlete"
+                    result.athlete = athcrew
+                
+                
+                #result.athlete = selath[0] if len(selath)>0 else None
                 result.laneNumber = r[2]
                 selc = Country.all().filter("code =", r[3]).fetch(1)
                 result.country = selc[0] if len(selc)>0 else None
                 result.race = selectedRace
                 result.put()
                 
+                
                 ci = ci + 1
                 if ci > 100:
                     return UA_direct(request, 'results/race-upload.html')
                 #print result
                 #print r
-            except:
-                    print ci
-    return UA_direct(request, 'results/race-upload.html')
+            #except:
+            #        errmsg ="Error on Line :%s of CSV, line looks like: %s" % (ci,r)
+    return UA_direct(request, 'results/race-upload.html', extra_context = errmsg)
 
 
 def upload(request):

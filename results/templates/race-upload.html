@@ -1,9 +1,14 @@
 {% extends 'site.html' %}
 
 {% block content %}
+
 				<form method="POST" enctype="multipart/form-data" action="/results/raceupload/">
 					<h1> Race Uploader </h1>
 					<input type="file" name="csv" />
 					<input type="submit" />
 				</form>
+				{% if errmsg %}
+				 <h1>FAIL:</h1>
+				 <h3>{{errmsg}}</h3>
+				{% endif %}
 {% endblock %}

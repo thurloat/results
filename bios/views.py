@@ -55,8 +55,8 @@ def show_crews(request):
 	return UA_object_list(request,Crew.all())
     
 def show_crew(request, key):
-	crew = Crew.get(key)
-	return UA_object_list(request,Athlete.gql("WHERE crew = :1", crew))
+    crew = Crew.get(key)
+    return UA_object_list(request,Athlete.gql("WHERE crew = :1", crew), extra_context={'crew':crew})
     
 def image_view(request, id):
     athlete = Athlete.all().filter("bibNum =",int(id)).get()

@@ -16,4 +16,5 @@ urlpatterns = patterns('bios.views',
 	(r'^athletes/(?P<country>[A-Z]{3})/(?P<crewNum>.+)/$', 'show_athletes_country_crew'),
 	(r'^athlete/(?P<identifier>.+)/$', 'show_athlete'),
 	(r'^upload/$', 'bio_upload'),
+	(r'^crew/(?P<key>.+)/$', 'show_crew'),
 )

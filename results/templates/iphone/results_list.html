@@ -1,0 +1,26 @@
+{% extends 'site.html' %}
+{% block title %}Race Results{% endblock %}
+
+{% block content %}
+{% load humanize %}
+<h1>Race Results</h1>
+
+<h2>{{ race.description }}</h2>
+<a href="{% url results.views.show_races  %}">Back to race list</a>
+<ul>
+	<li>
+		<div class="result_col"><strong>Place</strong></div>
+		<div class="result_col"><strong>Crew</strong></div>
+		<div class="result_col"><strong>Time</strong></div>
+		<div style="clear: both;"></div>
+	</li>
+  {% for result in object_list %}
+    <li>
+      <div class="result_col">{{ result.place|ordinal }}</div>
+      <div class="result_col">{{ result.lastName }}, {{ result.firstName }}</div> 
+	<div class="result_col">{{ result.finalTime }}</div> 
+	<div style="clear: both;"></div>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Norex Results</title>
+</head>
+
+<body>
+	<h1>Norex Results</h1><p>I am an RPC machine! check out /rpc for some results !!</p>
+	<h3>Actions</h3>
+	<h5>Gets</h5>
+	<ul>
+		<li>getRace - arg0('sort col'),arg1('sort dir'),arg2('max')
+			<ul>
+				<li>Returns Races /w sorting</li>
+				<li>Working /w valid json</li>
+			</ul>
+		</li>
+		<li>getResults - arg0('race number')
+			<ul>
+				<li>Returns Race Results for specified race, Small potential result set, so sorting can be done up front.</li>
+				<li>-working /w valid json-</li>
+			</ul>
+		</li>
+		<li>getSearch - arg0('model'),arg1('search term'),arg2('max')<ul><li>-Buggy-</li></ul></li>
+	</ul>
+	<h5>Puts / Imports</h5>
+	<ul>
+		<li><(0.0<) For My Eyes Only (>0.0)> -- see auth code or live update script, if you're allowed</li>
+	</ul>
+	<h3>Versions</h3>
+	<hr />
+	<h5>0.5</h5>
+	<p>REMOVED PUTS VIA POST</p>
+	<p>now upload .lif files at /upload, must match format or fail.</p>
+	<p>Added simplejson subclass to handle parsing of forms</p>
+	<p>Added put functions to secure method calling class</p>
+	<p>added /fake to test error codes with post data</p>
+	<hr />
+	<h5>0.2a</h5>
+	<p>Added puts via post</p>
+	<p>Fixed error sequence processing, more verbose errors /w binary codes</p>
+	<p>Added RPC Key to prevent outside parties from posting random data to mah codez</p>
+	<p>Added put functions to secure method calling class</p>
+	<p>added /fake to test error codes with post data</p>
+	<hr />
+	<h5>0.2</h5>
+	<p>Added JSON results{} wrapper around data in order to attach other non-result data and for easier decoding.</p>
+	<p>Fixed function name typo, getResults now works.</p>
+	<hr />
+	<h5>0.1b2</h5>
+	<p>Added get actions to documentation, created TODOs for implementing more features.</p>
+	<hr />
+	<h5>0.1b</h5>
+	<p>Filled with test data, more bug fixes (vague) and documentation writing</p>
+	<hr />
+	<h5>0.1a</h5>
+	<p>Initial upload to appspot, little testing and bug fixes</p>
+</body>
+</html>

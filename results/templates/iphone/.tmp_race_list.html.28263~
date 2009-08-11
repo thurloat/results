@@ -1,0 +1,14 @@
+{% extends 'site.html' %}
+{% block title %}Race Listing{% endblock %}
+{% block content %}
+<h1>Race Listing</h1>
+<ul>
+	 {% for race in object_list %}
+	<li>
+		{% if race.hasResults %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}
+		{{ race.description }}
+		{% if race.hasResults %}</a>{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

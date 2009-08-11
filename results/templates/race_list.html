@@ -5,9 +5,16 @@
 <ul>
 	 {% for race in object_list %}
 	<li>
-		{% if race.hasResults %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}
-		{{ race.description }}
-		{% if race.hasResults %}</a>{% endif %}
+		
+		Heat: {{ race.heatNumber }}
+		<ul>
+			<li>Result</li>
+			{% for result in race.results_race %}
+				<li>
+				{{ result }}
+				</li>
+			{% endfor %}
+		</ul>
 	</li>
 	{% endfor %}
 </ul>

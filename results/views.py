@@ -18,13 +18,23 @@ from ragendja.dbutils import get_object_or_404
 from ragendja.template import render_to_response
 from google.appengine.api import memcache
 
+from norex.generic import UA_object_list, UA_object_detail, UA_direct
+
 messages = []
 
-from results.models import Race, Results
+from results.models import Race, Results, Event
 
 def show_races(request):
     leaders = Results.all().order("time").fetch(5)
-    return object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
+    return UA_object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
+
+def show_events(request):
+    return UA_object_list(request,Event.all())
+
+def show_races_event(request, event):
+    event = Event.all().filter("eventString =", event).fetch(1)
+    return UA_object_list(request,Race.all().filter("event =",event[0]))
+
 
 def ajax(request):
 #    races = Race.all().order('-roundNumber').fetch(1)
@@ -37,16 +47,16 @@ def ajax(request):
 #    leaders = Results.gql("where race IN :1 order by time", raceslist).fetch(5)
     
     leaders = Results.all().order("time").fetch(5)
-    data = object_list(request,Race.all().order("raceNumber"), template_name="list.html", extra_context={'leaders':leaders})
+    data = UA_object_list(request,Race.all().order("raceNumber"), template_name="list.html", extra_context={'leaders':leaders})
     return data
     
 def show_race(request, key):
-	return object_list(request,Race.all(),key)
+	return UA_object_list(request,Race.all(),key)
 def show_result(request, key):
-	return object_detail(request,Results.all(),key)
+	return UA_object_list(request,Results.all(),key)
 def show_results(request, key):
     race = Race.get(key)
-    return object_list(request,queryset=Results.all().filter("race =", race).order("place"), extra_context={'race':race})
+    return UA_object_list(request,queryset=Results.all().filter("race =", race).order("place"), extra_context={'race':race})
 
 def buildleaders(request):
     from datetime import time
@@ -113,6 +123,75 @@ def getresult(field, race):
     result.splitDetails = field[10]
 
     return result
+
+def race_upload(request):
+    if request.method == 'POST':
+        import re
+        import os
+        
+        from bios.models import Country, Athlete
+        file = request.FILES['csv']
+        uploadfile=file.name; 
+        
+        file_contents = request.FILES['csv'].read().strip()
+
+        #file_contents = self.request.get('lif').strip()
+        import csv
+        imported = []
+        importReader = csv.reader(file_contents.split('\n'))
+
+        for row in importReader:
+            imported += [row]
+        #validate data structure
+        
+        ci = 0
+        selectedEvent = None
+        selectedRace = None
+        for r in imported:
+            if selectedEvent is not None and selectedEvent.eventString != r[0] or selectedEvent is None:
+               
+                    
+                #does this event already exist?
+                evtest = Event.all().filter("eventString =",r[0]).fetch(1)
+                print evtest
+                if len(evtest) > 0:
+                    selectedEvent = evtest[0]
+                    print "re-using event"
+                else:
+                    print "making new event"
+                    eventInfo = [x.strip() for x in r[0].split('-')]
+                    event = Event()
+                    event.eventClass=eventInfo[0]
+                    event.gender=eventInfo[1]
+                    event.distance=eventInfo[2]
+                    event.eventString=r[0]
+                    event.put()
+                    selectedEvent = event
+                
+            if selectedRace is not None and (selectedRace.event != selectedEvent or selectedRace.heatNumber != r[1]) or selectedRace is None:         
+                print "making new race"
+                race = Race()
+                race.event = selectedEvent
+                race.heatNumber = r[1]
+                race.hasResults = False
+                race.put()
+                
+                selectedRace = race
+            print r   
+            
+            result = Results()
+            
+            selath = Athlete.all().filter("bibNum =", int(r[5])).fetch(1)
+            result.athlete = selath[0] if len(selath)>0 else None
+            result.laneNumber = r[2]
+            selc = Country.all().filter("code =", r[3]).fetch(1)
+            result.country = selc[0] if len(selc)>0 else None
+            result.race = selectedRace
+            result.put()
+            print result
+            #print r
+    return UA_direct(request, 'results/race-upload.html')
+
 
 def upload(request):
     if request.method == 'POST':

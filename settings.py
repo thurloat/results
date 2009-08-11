@@ -54,6 +54,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
 )
 
+
+TEMPLATE_EXTRA = ('none',)
+
 MIDDLEWARE_CLASSES = (
     'ragendja.middleware.ErrorMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -69,7 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'ragendja.middleware.LoginRequiredMiddleware',
-    'norex.middleware.mobile',
+    #'norex.middleware.mobile',
 )
 
 # Google authentication
@@ -101,9 +104,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'appenginepatcher',
-    'results',
     'registration',
     'mediautils',
+    'results',
     'bios',
     'events',
     'myapp',

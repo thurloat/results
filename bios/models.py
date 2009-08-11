@@ -12,7 +12,7 @@ from google.appengine.ext import db
 from ragendja.dbutils import cleanup_relations, KeyListProperty
 from google.appengine.api import memcache
 from norex.properties import ReferenceListProperty
-from results.models import Event
+#from results.models import Event
 
 class Country(db.Model):
 	countryNumber = db.IntegerProperty()
@@ -42,6 +42,7 @@ class Athlete(db.Model):
 	coach = db.StringProperty()
 	picture = db.BlobProperty()
 	country = db.ReferenceProperty(Country)
+	gender = db.StringProperty(choices=('Male','Female'))
 		
 	def __unicode__(self):
 		return '%s. %s %s, %s' % (self.bibNum, self.firstName, self.lastName, self.country)
@@ -57,9 +58,10 @@ class Athlete(db.Model):
 		return Crew.gql('WHERE athletes = :ai', ai = self.key()).fetch(5)
 
 class Crew(db.Model):
+	#from results.models import Event as rEvent
 	crewNum = db.IntegerProperty()
 	country = db.ReferenceProperty(Country, collection_name = "crew_country")
-	event = db.ReferenceProperty(Event)
+	#event = db.ReferenceProperty(rEvent)
 	athletes = ReferenceListProperty(Athlete)
 	
 	def prefetch_athlete_data(self):

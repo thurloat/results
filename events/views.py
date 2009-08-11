@@ -16,13 +16,17 @@ from google.appengine.ext import db
 from mimetypes import guess_type
 from ragendja.dbutils import get_object_or_404
 from ragendja.template import render_to_response
-
+from django.conf import settings
 from events.models import Event
 
+from norex.generic import UA_object_list, UA_object_detail
+
+
 def list_latest(request):
-	return object_list(request,Event.all())
+    
+    return UA_object_list(request,Event.all())
 def event_detail(request, id):
-    return object_detail(request,Event.all(),slug_field="eventNumber",slug=int(id), template_name="mobile-eventDetail.html", template_object_name = "event")
+    return UA_object_detail(request,Event.all(),slug_field="eventNumber",slug=int(id), template_name="mobile-eventDetail.html", template_object_name = "event")
 def image_view(request, id):
     event = Event.all().filter("eventNumber =",int(id)).get()
     if event and event.image: 

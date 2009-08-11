@@ -4,13 +4,14 @@ from ragendja.urlsauto import urlpatterns
 from ragendja.auth.urls import urlpatterns as auth_patterns
 from myapp.forms import UserRegistrationForm
 from django.contrib import admin
+from norex.generic import UA_direct
 
 admin.autodiscover()
 
 handler500 = 'ragendja.views.server_error'
 
-urlpatterns = auth_patterns + patterns('django.views.generic.simple',
-    (r'^$',             'direct_to_template', {'template': 'homepage.html'}),
+urlpatterns = auth_patterns + patterns('norex.generic',
+    (r'^$',             'UA_direct', {'template': 'homepage.html'}),
 )   + patterns('',
     ('^admin/(.*)', admin.site.root),
     (r'^ajax$', 'results.views.ajax'),

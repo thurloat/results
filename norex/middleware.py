@@ -17,15 +17,12 @@ class mobile(object):
         
         #p = re.compile('mobile|iphone', re.IGNORECASE)
         #if p.search(self.normal_templates[0]):
-        #    self.normal_templates = (self.normal_templates[1],) + self.normal_templates
+            #self.normal_templates = (self.normal_templates[1],) + self.normal_templates
         self.iphone_templates = (self.normal_templates[0] + '/iphone',) + self.normal_templates
         self.mobile_templates = (self.normal_templates[0] + '/mobile',) + self.normal_templates
 
     def process_request(self, request):
-        # ""
-        #test = template.get_app_dirs('templates/iphone')
-        #print test
-        #p = re.compile('iPhone|iPod|BlackBerry|Android|Nokia|webOS', re.IGNORECASE)
+        
         p = re.compile('iPhone|iPod|Android|webOS', re.IGNORECASE)
         if p.search(request.META['HTTP_USER_AGENT']):
             # user agent looks like iPhone or iPod
@@ -37,5 +34,6 @@ class mobile(object):
                 settings.TEMPLATE_DIRS = self.mobile_templates
             else:
                 # other standard user agents
+               
                 settings.TEMPLATE_DIRS = self.normal_templates
         return

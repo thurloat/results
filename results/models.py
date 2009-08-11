@@ -49,9 +49,10 @@ class Race(db.Model):
 
 class Results(db.Model):
 	place = db.StringProperty()
-	athlete = db.ReferenceProperty(Athlete)
+	athlete = db.ReferenceProperty(Athlete, collection_name="result_athlete")
+	crew = db.ReferenceProperty(Crew, collection_name="result_crew")
 	laneNumber = db.StringProperty()
-	country = db.ReferenceProperty(Country)
+	country = db.ReferenceProperty(Country, collection_name="result_country")
 	finalTime = db.StringProperty()
 	deltaTime = db.StringProperty()
 	splitDetails = db.StringProperty()

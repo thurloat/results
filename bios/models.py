@@ -41,7 +41,7 @@ class Athlete(db.Model):
 	homeTown = db.StringProperty()
 	coach = db.StringProperty()
 	picture = db.BlobProperty()
-	country = db.ReferenceProperty(Country)
+	country = db.ReferenceProperty(Country, collection_name = "athlete_country")
 	gender = db.StringProperty(choices=('Male','Female'))
 		
 	def __unicode__(self):
@@ -60,9 +60,8 @@ class Athlete(db.Model):
 class Crew(db.Model):
 	#from results.models import Event as rEvent
 	crewNum = db.IntegerProperty()
-	country = db.ReferenceProperty(Country, collection_name = "crew_country")
-	#event = db.ReferenceProperty(rEvent)
 	athletes = ReferenceListProperty(Athlete)
+	crewString = db.StringProperty()
 	
 	def prefetch_athlete_data(self):
 		print self.athletes
@@ -72,7 +71,7 @@ class Crew(db.Model):
 		print self.athletes
 	
 	def __unicode__(self):
-		return '%s, %s. %s' % (self.country.code, self.crewNum, self.event)
+		return '%s, %s. %s' % (self.crewNum, self.athletes, self.crewString)
 	
 	
 	

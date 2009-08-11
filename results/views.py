@@ -145,7 +145,9 @@ def race_upload(request):
         uploadfile=file.name; 
         
         file_contents = request.FILES['csv'].read().strip()
-
+        
+        p = re.compile('\r', re.IGNORECASE)
+        file_contents = p.sub('\n',file_contents)
         #file_contents = self.request.get('lif').strip()
         import csv
         imported = []
@@ -159,54 +161,74 @@ def race_upload(request):
         selectedEvent = None
         selectedRace = None
         for r in imported:
-            if selectedEvent is not None and selectedEvent.eventString != r[0] or selectedEvent is None:
-               
+            try:
+                if selectedEvent is not None and selectedEvent.eventString != r[0] or selectedEvent is None:
+                    #does this event already exist?
+                    evtest = Event.all().filter("eventString =",r[0]).fetch(1)
+                    #print evtest
+                    if len(evtest) > 0:
+                        selectedEvent = evtest[0]
+                        #print "re-using event"
+                    else:
+                        #print "making new event"
+                        eventInfo = [x.strip() for x in r[0].split('-')]
+                        event = Event()
+                        event.eventClass=eventInfo[0]
+                        event.gender=eventInfo[1]
+                        event.distance=eventInfo[2]
+                        event.eventString=r[0]
+                        event.put()
+                        selectedEvent = event
                     
-                #does this event already exist?
-                evtest = Event.all().filter("eventString =",r[0]).fetch(1)
-                #print evtest
-                if len(evtest) > 0:
-                    selectedEvent = evtest[0]
-                    #print "re-using event"
-                else:
-                    #print "making new event"
-                    eventInfo = [x.strip() for x in r[0].split('-')]
-                    event = Event()
-                    event.eventClass=eventInfo[0]
-                    event.gender=eventInfo[1]
-                    event.distance=eventInfo[2]
-                    event.eventString=r[0]
-                    event.put()
-                    selectedEvent = event
-                
-            if selectedRace is not None and (selectedRace.event != selectedEvent or selectedRace.heatNumber != r[1]) or selectedRace is None:         
-                #print "making new race"
-                #check and re-use old races.
-                ractest = Race.all().filter("event =",selectedEvent).filter("heatNumber =",r[1]).fetch(1)
-                if len(ractest) > 0:
-                    selectedRace = ractest[0]
-                else:
-                
-                    race = Race()
-                    race.event = selectedEvent
-                    race.heatNumber = r[1]
-                    race.hasResults = False
-                    race.put()
+                if selectedRace is not None and (selectedRace.event != selectedEvent or selectedRace.heatNumber != r[1]) or selectedRace is None:         
+                    #print "making new race"
+                    #check and re-use old races.
+                    ractest = Race.all().filter("event =",selectedEvent).filter("heatNumber =",r[1]).fetch(1)
+                    if len(ractest) > 0:
+                        selectedRace = ractest[0]
+                    else:
                     
-                    selectedRace = race
-           
-            
-            result = Results()
-            
-            selath = Athlete.all().filter("bibNum =", int(r[5])).fetch(1)
-            result.athlete = selath[0] if len(selath)>0 else None
-            result.laneNumber = r[2]
-            selc = Country.all().filter("code =", r[3]).fetch(1)
-            result.country = selc[0] if len(selc)>0 else None
-            result.race = selectedRace
-            result.put()
-            #print result
-            #print r
+                        race = Race()
+                        race.event = selectedEvent
+                        race.heatNumber = r[1]
+                        race.hasResults = False
+                        race.put()
+                        
+                        selectedRace = race
+                
+                if len(r) > 6 and r[6] != '':
+                    #print "bigger row"
+                        """
+                            it's a crew@@
+                        """
+                        print "2 man crew"
+                        print "%s %s" % (r[5], r[6])
+                        if len(r) >8 and r[7] != '':
+                            """
+                                it's a 4 man crew
+                            """
+                            print "4 man crew"
+                            print "%s %s %s %s" % (r[5],r[6],r[7],r[8])    
+                else:
+                    print "single Race"
+                    print r[5]
+                result = Results()
+                
+                selath = Athlete.all().filter("bibNum =", int(r[5])).fetch(1)
+                result.athlete = selath[0] if len(selath)>0 else None
+                result.laneNumber = r[2]
+                selc = Country.all().filter("code =", r[3]).fetch(1)
+                result.country = selc[0] if len(selc)>0 else None
+                result.race = selectedRace
+                result.put()
+                
+                ci = ci + 1
+                if ci > 100:
+                    return UA_direct(request, 'results/race-upload.html')
+                #print result
+                #print r
+            except:
+                    print ci
     return UA_direct(request, 'results/race-upload.html')
 
 

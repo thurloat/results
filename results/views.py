@@ -136,8 +136,8 @@ def purge_race_data(request):
     
 
 def race_upload(request):
+    errmsg = None
     if request.method == 'POST':
-        errmsg = None
         import re
         import os
         

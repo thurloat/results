@@ -8,7 +8,7 @@
 {% endfor %}
 </ul>
 
-
+{% comment %}
 {% for country in countries %}
 <ul id="{{ country.code }}">
 	<li class="group">{{ country.code }}</li>
@@ -21,4 +21,5 @@
 </ul>
 {% endfor %}
 </div>
+{% endcomment %}
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends 'site.html' %}
 {% block content %}
+<div class="icf">
 <ul id="AthleteDetail" title="Athlete Detail">
 	<li>
 		<img src="/bio/img/{{ athlete.bibNum }}" alt="athlete image" width="100px" style="float:right;"/>
@@ -18,4 +19,5 @@
 		<li><a href="/bio/athletes/{{ athlete.country.code }}/{{ crew.crewNum }}">{{ crew.event }}</a></li>
 	{% endfor %}
 </ul>
+</div>
 {% endblock %}

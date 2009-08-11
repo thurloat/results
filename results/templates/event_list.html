@@ -1,6 +1,7 @@
 {% extends 'site.html' %}
 {% block title %}Race Listing{% endblock %}
 {% block content %}
+<div class="icf">
 <h1>Event Listing</h1>
 <ul>
 	 {% for event in object_list %}
@@ -9,4 +10,5 @@
 	</li>
 	{% endfor %}
 </ul>
+</div>
 {% endblock %}

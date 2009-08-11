@@ -60,7 +60,7 @@ class Athlete(db.Model):
 class Crew(db.Model):
 	#from results.models import Event as rEvent
 	crewNum = db.IntegerProperty()
-	athletes = ReferenceListProperty(Athlete)
+	athletes = ReferenceListProperty(Athlete, collection_name ="crew_athlete")
 	crewString = db.StringProperty()
 	
 	def prefetch_athlete_data(self):

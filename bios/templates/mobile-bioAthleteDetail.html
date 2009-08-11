@@ -15,8 +15,9 @@
 	<li>Hometown: {{ athlete.homeTown }}</li>
 	<li>Coach: {{ athlete.coach }}</li>
 	<li class="group">Events</li>
-	{% for crew in crews %}
-		<li><a href="/bio/athletes/{{ athlete.country.code }}/{{ crew.crewNum }}">{{ crew.event }}</a></li>
+	
+	{% for result in athlete.result_athlete %}
+		<li><a href="/results/">{{ result.race.event }}</a></li>
 	{% endfor %}
 </ul>
 </div>

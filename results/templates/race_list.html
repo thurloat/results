@@ -1,6 +1,7 @@
 {% extends 'site.html' %}
 {% block title %}Race Listing{% endblock %}
 {% block content %}
+<div class="icf">
 <h1>Race Listing</h1>
 <ul>
 	 {% for race in object_list %}
@@ -8,14 +9,20 @@
 		
 		<h3>Heat: {{ race.heatNumber }}</h3>
 		<ul>
-			<li>Result</li>
 			{% for result in race.results_race %}
 				<li>
-				{{ result }}
+				L:{{ result.laneNumber }}, {{ result.country.code }},
+				{% if result.athlete %}
+					<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
+				{% else %}
+					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }},{% endfor %}</a>
+				{% endif %}
+				Final: {% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}
 				</li>
 			{% endfor %}
 		</ul>
 	</li>
 	{% endfor %}
 </ul>
+</div>
 {% endblock %}

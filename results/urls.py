@@ -18,5 +18,7 @@ urlpatterns = patterns('results.views',
 	(r'^upload/$',             'upload'),
 	(r'^cron/$',               'buildleaders'),
 	(r'^raceupload/$',         'race_upload'),
-	(r'^purge/$',              'purge_race_data'),
+	(r'^purgera$',              'purge_race'),
+	(r'^purgere$',              'purge_results'),
+	(r'^purgee$',              'purge_event'),
 )

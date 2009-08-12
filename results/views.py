@@ -29,7 +29,7 @@ def show_races(request):
     return UA_object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
 
 def show_events(request):
-    return UA_object_list(request,Event.all())
+    return UA_object_list(request,Event.all().order("eventString"), template_name="2event_list.html")
 
 def show_races_event(request, event):
     event = Event.all().filter("eventString =", event).fetch(1)
@@ -124,20 +124,25 @@ def getresult(field, race):
 
     return result
 
-def purge_race_data(request):
-    list = Results.all().fetch(1000)
+def purge_results(request):
+    list = Results.all().fetch(250)
     db.delete(list)
-    list = Race.all().fetch(1000)
+    return UA_direct(request,'race-upload.html')
+def purge_race(request):
+    list = Race.all().fetch(250)
     db.delete(list)
-    list = Event.all().fetch(1000)
+    return UA_direct(request,'race-upload.html')
+def purge_event(request):
+    list = Event.all().fetch(250)
     db.delete(list)
-    
     return UA_direct(request,'race-upload.html')
     
 
 def race_upload(request):
-    errmsg = None
+    errmsg = []
     if request.method == 'POST':
+        errmsg += ['beginning import']
+        
         import re
         import os
         
@@ -161,8 +166,9 @@ def race_upload(request):
         ci = 0
         selectedEvent = None
         selectedRace = None
+        errmsg += ['in the loop']
         for r in imported:
-            #try:
+            try:
                 if selectedEvent is not None and selectedEvent.eventString != r[0] or selectedEvent is None:
                     #does this event already exist?
                     evtest = Event.all().filter("eventString =",r[0]).fetch(1)
@@ -247,13 +253,16 @@ def race_upload(request):
                 
                 
                 ci = ci + 1
-                if ci > 100:
-                    return UA_direct(request, 'results/race-upload.html')
+                #if ci > 100:
+                #    return UA_direct(request, 'results/race-upload.html')
                 #print result
                 #print r
-            #except:
-            #        errmsg ="Error on Line :%s of CSV, line looks like: %s" % (ci,r)
-    return UA_direct(request, 'results/race-upload.html', extra_context = errmsg)
+            except:
+                    errmsg += ["Error on Line :%s of CSV, line looks like: %s" % (ci,r)]
+                    
+            errmsg += ["%s rows imported<br/>" % ci]
+    
+    return UA_direct(request, 'results/race-upload.html', extra_context={"errmsg":errmsg})
 
 
 def upload(request):

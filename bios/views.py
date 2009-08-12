@@ -24,7 +24,7 @@ from bios.models import Crew, Country, Athlete
 from results.models import Event
 
 def show_bios_overview_mobile(request):
-    #memcache.delete("biosHtml")
+    memcache.delete("biosHtml")
     data = memcache.get('biosHtml')
     if data is not None:
         return data
@@ -69,9 +69,25 @@ def image_view(request, id):
         return response
     else:
         raise Http404('Sorry, I couldnt find that image!')
-    
+
+def bio_delete_country(request):
+    list = Country.all(keys_only=True).fetch(200)
+    db.delete(list)
+    return UA_direct(request, 'homepage.html')
+def bio_delete_athlete(request):
+    list = Athlete.all(keys_only=True).fetch(250)
+    db.delete(list)
+    return UA_direct(request, 'homepage.html')
+def bio_delete_crew(request):
+    list = Crew.all(keys_only=True).fetch(250)
+    db.delete(list)
+    return UA_direct(request, 'homepage.html')
+
 def bio_upload(request):
+    errmsg = []
     if request.method == 'POST':
+        errmsg += ["entering upload phase"]        
+
         import re
         import os
         file = request.FILES['bios']
@@ -89,22 +105,26 @@ def bio_upload(request):
         
         ci = 0
         selectedCountry = None
+        
         for r in imported:
-            if len(r) is 2:
-                name = [x.strip() for x in r[1].split('-')]
-                #print name
-                country = Country(name = name[0], code = name[1], countryNumber = ci)
-                ci = ci + 1
-                country.put()
-                selectedCountry = country
-            else:
-                #print r
-                athlete = Athlete()
-                athlete.bibNum=int(r[0]) if r[0] is not '' else int(81)
-                athlete.firstName=r[1]
-                athlete.lastName=r[3]
-                athlete.gender="Male" if r[4] is "M" else "Female"
-                athlete.country = selectedCountry
-                athlete.put()
-                
-    return UA_direct(request, 'bios/upload.html');
+            try:
+                if len(r) is 2:
+                    name = [x.strip() for x in r[1].split('-')]
+                    #print name
+                    country = Country(name = name[0], code = name[1], countryNumber = ci)
+                    ci = ci + 1
+                    country.put()
+                    selectedCountry = country
+                else:
+                    #print r
+                    athlete = Athlete()
+                    athlete.bibNum=int(r[0]) if r[0] is not '' else int(81)
+                    athlete.firstName=r[1]
+                    athlete.lastName=r[3]
+                    athlete.gender="Male" if r[4] is "M" else "Female"
+                    athlete.country = selectedCountry
+                    athlete.put()
+            except:
+                errmsg += [r]
+    errmsg += ["finished"]                
+    return UA_direct(request, 'bios/upload.html', extra_context={'errmsg':errmsg})

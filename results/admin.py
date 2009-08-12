@@ -8,17 +8,12 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 """
 
 from django.contrib import admin
-from results.models import Race, Results, Event, EventDistance, EventClass, EventGender
+from results.models import Race, Results, Event
 
-class ResultsInline(admin.TabularInline):
-	model = Results
-class RaceAdmin(admin.ModelAdmin):
-	inlines = (ResultsInline,)
-	
+class RaceInline(admin.TabularInline):
+	model = Race
 
+class EventAdmin(admin.ModelAdmin):
+	inlines = (RaceInline,)
 	
-admin.site.register(Race,RaceAdmin)
-admin.site.register(EventDistance)
-admin.site.register(EventClass)
-admin.site.register(EventGender)
-admin.site.register(Event)
+admin.site.register(Event,EventAdmin)

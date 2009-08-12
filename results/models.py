@@ -27,10 +27,13 @@ class Race(db.Model):
 	raceNumber = db.IntegerProperty()
 	roundNumber = db.StringProperty()
 	heatNumber = db.StringProperty()
+	raceTime = db.DateTimeProperty()
 	description = db.StringProperty()
 	windSpeed = db.StringProperty()
 	weather = db.StringProperty()
 	hasResults = db.BooleanProperty()
+	
+	
 	
 	def __unicode__(self):
 		return '%s - %s' % (self.raceNumber, self.description)

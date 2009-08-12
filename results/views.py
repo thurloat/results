@@ -137,6 +137,39 @@ def purge_event(request):
     db.delete(list)
     return UA_direct(request,'race-upload.html')
     
+    
+def evt_upload(request):
+    if request.method == 'POST':
+        memcache.delete("raceshtml")
+
+        file_contents = request.FILES['evt'].read().strip()
+
+        #file_contents = self.request.get('lif').strip()
+        import csv
+        imported = []
+        importReader = csv.reader(file_contents.split('\n'))
+        for row in importReader:
+            imported += [row]
+            
+        for row in imported:
+            if len(row) == 4:
+                fields = row[3].strip().split(" ")
+                events = Event.all().filter("eventClass =", fields[2])
+                
+                matched = None
+                for e in events:
+                    if e.distance.strip("m") == fields[4].strip("m") and e.gender == fields[3]:
+                        matched = e
+                        
+                if matched is not None:
+                    races = matched.race_set.filter("heatNumber =", "H" + row[2]).fetch(1000);
+                    if races is not None and races[0] is not None:
+                        race = races[0]
+                        race.raceNumber = int(row[0])
+                        race.put()
+            
+    return render_to_response(request, 'results/evtupload.html', {'messages':messages});
+        
 
 def race_upload(request):
     errmsg = []

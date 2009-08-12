@@ -1,0 +1,10 @@
+
+<h1>Event Listing</h1>
+<ul>
+	 {% for event in object_list %}
+	<li>
+		<a href="races/{{event.eventString}}">{{ event }}</a>
+	</li>
+	{% endfor %}
+</ul>
+</div>

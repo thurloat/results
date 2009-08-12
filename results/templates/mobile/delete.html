@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+function confirmdel() {
+	var answer = confirm("Really?? Delete EVERYTHING!!?!?!?")
+	if (answer){
+		return true;
+	}
+	else{
+		return false;
+	}
+	
+}
+</script>
+<form action="/results/delete" method="post" onsubmit="return confirmdel();">
+<input type="submit" value="DELETE ALL RACE DATA" />
+</form>
+		
+{% endblock %}

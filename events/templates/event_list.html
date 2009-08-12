@@ -1,34 +1,6 @@
 {% extends 'site.html' %}
 {% block content %}
-<style>
-	div#contentInner ul#events li {
-padding:0 0 20px 0;
-}
 
-div#contentInner ul#events li a {
-font-size:14px!important;
-}
-
-div#contentInner ul#events h3 {
-font-size:18px!important;
-}
-	div#contentInner ul {
-padding:20px 0 0 0;
-margin:0;
-list-style:none;
-}
-
-div#contentInner ul li {
-padding:0;
-margin:0;
-font-family:Helvetica, Arial, sans-serif;
-line-height:19px;
-font-size:12px;
-color:#797979;
-list-style:none;
-}
-	
-</style>
 {% regroup object_list|dictsort:"date" by date as date_list %}
 
 <div class="icf">

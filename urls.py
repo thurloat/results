@@ -14,6 +14,7 @@ urlpatterns = auth_patterns + patterns('norex.generic',
     (r'^$',             'UA_direct', {'template': 'homepage.html'}),
     (r'^help/',         'UA_direct', {'template': 'help.html'}),
 )   + patterns('',
+    
     ('^admin/(.*)',     admin.site.root),
     (r'^ajax$',         'results.views.ajax'),
     # Override the default registration form

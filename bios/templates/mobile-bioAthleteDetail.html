@@ -5,19 +5,24 @@
 	<li>
 		<img src="/bio/img/{{ athlete.bibNum }}" alt="athlete image" width="100px" style="float:right;"/>
 		<div>
-			{{ athlete.lastName }}, {{ athlete.firstName }}<br />
-			{{ athlete.country }}<br />
-			{{ athlete.birthDate }}<br />
+			<h3>{{ athlete.lastName }}, {{ athlete.firstName }}</h3>
+			{{ athlete.country.name }}, {{ athlete.country.code }}<br />
+			{% if athlete.birthday %}{{ athlete.birthDate }}<br />{% endif %}
 		</div>
 	</li>
 	<li class="group">Details</li>
 	<li>Bib Number: {{ athlete.bibNum }}</li>
-	<li>Hometown: {{ athlete.homeTown }}</li>
-	<li>Coach: {{ athlete.coach }}</li>
+	{% if athlete.homeTown %}<li>Hometown: {{ athlete.homeTown }}</li>{% endif %}
+	{% if athlete.coach %}<li>Coach: {{ athlete.coach }}</li>{% endif %}
 	<li class="group">Events</li>
 	
 	{% for result in athlete.result_athlete %}
-		<li><a href="/results/">{{ result.race.event }}</a></li>
+		<li><a href="/results/races/{{result.race.event.eventString}}">{{ result.race.event }}</a></li>
+	{% endfor %}
+	{% for crew in athlete.crew_athlete %}
+		{% for result in crew.result_crew %}
+		<li><a href="/results/races/{{result.race.event.eventString}}">{{result.race.event}}</a></li>
+		{% endfor %}
 	{% endfor %}
 </ul>
 </div>

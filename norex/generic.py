@@ -17,7 +17,7 @@ def set_dir(request, tpl, queryset = None, view = None):
     return templatename
 
 def UA_direct(request, template, extra_context=None, mimetype=None, **kwargs):
-    return direct_to_template(request, set_dir(request,template), extra_context=None, mimetype=None, **kwargs)
+    return direct_to_template(request, set_dir(request,template), extra_context=extra_context, mimetype=None, **kwargs)
 
 def UA_object_list(request, queryset, template_name = None, extra_context = None, **kwargs):
     return object_list(request, queryset, template_name = set_dir(request, template_name, queryset, "list"), extra_context = extra_context)

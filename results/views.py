@@ -159,7 +159,11 @@ def evt_upload(request):
                         matched = e
                         
                 if matched is not None:
-                    print matched.race_set.fetch(1000)
+                    races = matched.race_set.filter("heatNumber =", "H" + row[2]).fetch(1000);
+                    if races is not None and races[0] is not None:
+                        race = races[0]
+                        race.raceNumber = int(row[0])
+                        race.put()
             
     return render_to_response(request, 'results/evtupload.html', {'messages':messages});
         

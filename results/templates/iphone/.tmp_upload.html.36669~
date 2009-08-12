@@ -1,9 +1,0 @@
-{% extends 'site.html' %}
-
-{% block content %}
-				<form method="POST" enctype="multipart/form-data" action="/results/upload/">
-					<h1> .lif and .evt uploader. </h1>
-					<input type="file" name="lif" />
-					<input type="submit" />
-				</form>
-{% endblock %}

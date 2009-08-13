@@ -1,6 +1,6 @@
 <ul id="AthleteDetail" title="Athlete Detail">
 	<li>
-		<img src="/bio/img/{{ athlete.bibNum }}" alt="athlete image" width="100px" style="float:right;"/>
+		<img src="/images/athletes/{{ athlete.bibNum|stringformat:"03d" }}.png" alt="athlete image" width="100px" style="float:right;"/>
 		<div>
 			<h3>{{ athlete.lastName }}, {{ athlete.firstName }}</h3>
 			{{ athlete.country.name }}, {{ athlete.country.code }}<br />

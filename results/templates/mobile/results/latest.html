@@ -1,4 +1,4 @@
-	<ul selected="true">
+<ul selected="true">
 <li>Latest Result</li>
 <li>
 <h3>{{ race.event.eventString }} - Heat: {{ race.heatNumber }} {{ race.raceTime|time:"H:i" }}</h3>
@@ -13,7 +13,7 @@
 			<td>
 				{{ result.country.code }}
 				{% if result.athlete %}
-				<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
+					<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
 				{% else %}
 					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }}, {% endfor %}</a>
 				{% endif %}

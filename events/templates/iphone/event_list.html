@@ -1,7 +1,7 @@
 {% regroup object_list|dictsort:"date" by date as date_list %}
 <ul id="events" title="Events" selected="true">
 {% for date in date_list %}
-	<li class="group">{{ date.grouper|date:"D F d" }} - iPhone</li>
+	<li class="group">{{ date.grouper|date:"D F d" }}</li>
 	{% for event in date.list %}
 	<li>
 		<a href="/events/{{ event.eventNumber }}" class="clock">{{ event.time|time:"H" }}</a>

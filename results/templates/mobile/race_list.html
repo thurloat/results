@@ -1,11 +1,28 @@
-
-<h1>Race Listing</h1>
-<ul>
+<ul id="races" title="Races" selected="true">
+	<li class="group">Race Listing - {{ race.event.eventString }}</li>
 	 {% for race in object_list %}
 	<li>
-		{% if race.hasResults %}<a href="{% url results.views.show_results key=race.key %}">{% endif %}
-		{{ race.description }}
-		{% if race.hasResults %}</a>{% endif %}
+		<a href="#{{race.heatNumber}}">
+			Heat: {{ race.heatNumber }}
+		</a>
 	</li>
 	{% endfor %}
 </ul>
+
+{% for race in object_list %}
+<ul id="{{race.heatNumber}}" title="Heat {{race.heatNumber}}">
+	<li class="group">heat: {{ race.heatNumber }}</li>
+	{% for result in race.results_race %}
+		<li>
+		Lane:{{ result.laneNumber }}, {{ result.country.code }},
+		{% if result.athlete %}
+			<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
+		{% else %}
+			<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }},{% endfor %}</a>
+		{% endif %}
+		Final: {% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}
+		</li>
+	{% endfor %}
+	<li><a href="#races">Back To Race List</a></li>
+</ul>
+{% endfor %}

@@ -1,9 +1,16 @@
 <ul id="evt1" title="Event 1">
 	<li>{{ event.title }} - iPhone</li>
-	<li style="font-size:smaller;min-height:75px;">
-		
-		{{ event.description }}
-		<img src="/events/img/{{ event.eventNumber }}" height="75px" style="float:right; padding: 5px" />
+	<li style="font-size:smaller">
+		<table>
+			<tr>
+				<td>
+					{{ event.description }}
+				</td>
+				<td>
+					<img src="/events/img/{{ event.eventNumber }}" height="75px" style="padding: 5px" />
+				</td>
+			</tr>
+		</table>
 	</li>
 	<li>Tickets: {{ event.price }}</li>
 	<li>Time: {{ event.time }} </li>

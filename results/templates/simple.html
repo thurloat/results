@@ -1,0 +1,37 @@
+{% extends 'basic.html' %}
+{% block refresh %}
+<meta http-equiv="refresh" content="25">
+{% endblock %}
+{% block title %}Race Listing{% endblock %}
+
+{% block content %}
+
+<div class="icf">
+	<h1>Latest Result</h1>
+	<h3>{{ race.event.eventString }} - Heat: {{ race.heatNumber }} - {{ race.raceTime|date:"D," }} {{ race.raceTime|time:"H:i" }}</h3>
+	<table>
+		<tr>
+			<th>Place:</th><th>Lane:</th><th>Country:</th><th>Participants:</th><th>Final Time:</th>
+		</tr>
+		{% for result in results %}
+		<tr>
+			<td>{{ result.place }}</td>
+			<td>{{ result.laneNumber }}</td>
+			<td>{{ result.country.code }}</td>
+			<td>
+				{% if result.athlete %}
+				<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
+				{% else %}
+					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }}, {% endfor %}</a>
+				{% endif %}
+			</td>
+			<td>{% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<br />
+	<h3><a href="/results/schedule">See Race Schedule</a>
+	<h3><a href="/results/listing/">See Full Event Listing</a></h3>
+</div>
+
+{% endblock %}

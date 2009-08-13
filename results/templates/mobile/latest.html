@@ -1,4 +1,12 @@
+{% extends 'site.html' %}
+{% block refresh %}
+<meta http-equiv="refresh" content="25">
+{% endblock %}
+{% block title %}Race Listing{% endblock %}
 
+{% block content %}
+
+<div class="icf">
 	<h1>Latest Result</h1>
 	<h3>{{ race.event.eventString }} - Heat: {{ race.heatNumber }} - {{ race.raceTime|date:"D," }} {{ race.raceTime|time:"H:i" }}</h3>
 	<table>
@@ -24,3 +32,6 @@
 	<br />
 	<h3><a href="/results/schedule">See Race Schedule</a>
 	<h3><a href="/results/listing/">See Full Event Listing</a></h3>
+</div>
+
+{% endblock %}

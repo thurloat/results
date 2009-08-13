@@ -1,0 +1,9 @@
+<h1>Crew</h1>
+<ul id="athletes" title="Bios" selected="true">
+<li>{{ crew.event }}</li>
+<li>Team {{ crew.result_crew.0.country.name }}</li>
+<li>Members:</li>
+{% for athlete in crew.athletes %}
+<li><a href="/bio/athlete/{{ athlete.bibNum }}">{{ athlete }}</a></li>
+{% endfor %}
+</ul>

@@ -362,6 +362,10 @@ width:510px;
 padding:0 0 0 190px;
 }
 
+div.icf table {
+	width: 100%;
+}
+
 /*CANOE 09 STYLES*/
 
 h1, h2, h3			{clear: left;}

@@ -3,10 +3,10 @@
 <div class="icf">
 <ul id="AthleteDetail" title="Athlete Detail">
 	<li>
-		<img src="/bio/img/{{ athlete.bibNum }}" alt="athlete image" width="100px" style="float:right;"/>
+		<img src="/images/athletes/{{ athlete.bibNum|stringformat:"03d" }}.png" width="100px" style="float:right;"/>
 		<div>
 			<h3>{{ athlete.lastName }}, {{ athlete.firstName }}</h3>
-			{{ athlete.country.name }}, {{ athlete.country.code }}<br />
+			<img src="/bio/flag/{{ athlete.country.code }}" /> {{ athlete.country.name }}, {{ athlete.country.code }}<br />
 			{% if athlete.birthDate %}{{ athlete.birthDate }}<br />{% endif %}
 		</div>
 	</li>

@@ -484,19 +484,29 @@ div#contentInner div {
 background:none!important;
 }
 div.icf table {
-border-top:1px solid #ccc;
 border-bottom:1px solid #ccc;
 padding:10px 0 10px 0;
+border-collapse:collapse;
+border-left:1px solid #ccc;
+border-right:1px solid #ccc;
 }
 
 div.icf table td {
 text-align:center;
 font-size:14px;
 padding-bottom:10px;
+padding-top:5px;
+background-image:url(/images/resultBg.jpg);
+background-repeat:repeat-x;
 }
 
 div.icf table th {
 text-align:center;
-padding:0 10px 10px 10px;
+padding:5px 10px 10px 10px;
 color:#b4161d;
+background-image:url(/images/resultHeaderBg.jpg);
+background-repeat:repeat-x;
+color:#fff!important;
+background-position:0 0;
+font-size:14px;
 }

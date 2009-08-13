@@ -18,6 +18,7 @@ class Country(db.Model):
 	countryNumber = db.IntegerProperty()
 	code = db.StringProperty()
 	name = db.StringProperty()
+	flag = db.BlobProperty()
 	
 	def __unicode__(self):
 		return self.code

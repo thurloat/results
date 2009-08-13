@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object, delete_object, \
     update_object
 from google.appengine.ext import db
@@ -24,6 +25,9 @@ messages = []
 
 from results.models import Race, Results, Event
 
+def show_schedule(request):
+    return UA_object_list(request,Race.all().order("raceTime").filter("raceTime !=",None), template_name="schedule.html")
+
 def show_races(request):
     leaders = Results.all().order("time").fetch(5)
     return UA_object_list(request,Race.all().order("raceNumber"), extra_context={'leaders':leaders})
@@ -33,9 +37,16 @@ def show_events(request):
 
 def show_races_event(request, event):
     event = Event.all().filter("eventString =", event).fetch(1)
+    
     return UA_object_list(request,Race.all().filter("event =",event[0]).order("raceNumber"))
 
-
+def latest_races_web(request):
+    race = Race.all().filter("hasResults =", True).order("-raceNumber").fetch(1)
+    if len(race)>0:
+        results = Results.all().filter("race =",race[0]).order("place")
+    else:
+        results = None
+    return UA_direct(request,template="results/latest.html", extra_context={'results':results,'race':race[0] if len(race)>0 else None})
 def ajax(request):
 #    races = Race.all().order('-roundNumber').fetch(1)
 #    r = races.pop(0)
@@ -177,8 +188,9 @@ def lif_upload(request):
                     result[0].place = r[0]
                     result[0].finalTime = r[6]
                     result[0].put()
-
-    return UA_direct(request, 'results/lif-upload.html', extra_context={"errmsg":errmsg})
+        selectedRace.hasResults = True
+        selectedRace.put()
+    return direct_to_template(request, 'results/lif-upload.html', extra_context={"errmsg":errmsg})
 def evt_upload(request):
     if request.method == 'POST':
         memcache.delete("raceshtml")
@@ -336,7 +348,7 @@ def race_upload(request):
                     
             errmsg += ["%s rows imported<br/>" % ci]
     
-    return UA_direct(request, 'results/race-upload.html', extra_context={"errmsg":errmsg})
+    return render_to_response(request, 'results/race-upload.html', extra_context={"errmsg":errmsg})
 
 
 def upload(request):

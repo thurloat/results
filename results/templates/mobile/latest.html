@@ -1,17 +1,11 @@
-{% extends 'site.html' %}
-{% block title %}Race Listing{% endblock %}
-{% block content %}
-<div class="icf">
-<h1>Race Listing</h1>
-<ul>
-{% for race in object_list %}
-<li>
-	<h3 id="{{race.heatNumber}}">{{race.event}} - Heat: {{ race.heatNumber }} - {{ race.raceTime|date:"D," }} {{ race.raceTime|time:"H:i" }}</h3>
+
+	<h1>Latest Result</h1>
+	<h3>{{ race.event.eventString }} - Heat: {{ race.heatNumber }} - {{ race.raceTime|date:"D," }} {{ race.raceTime|time:"H:i" }}</h3>
 	<table>
 		<tr>
 			<th>Place:</th><th>Lane:</th><th>Country:</th><th>Participants:</th><th>Final Time:</th>
 		</tr>
-		{% for result in race.results_race %}
+		{% for result in results %}
 		<tr>
 			<td>{{ result.place }}</td>
 			<td>{{ result.laneNumber }}</td>
@@ -26,9 +20,7 @@
 			<td>{% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}</td>
 		</tr>
 		{% endfor %}
-	</table>		
-</li>
-{% endfor %}
-</ul>
-</div>
-{% endblock %}
+	</table>
+	<br />
+	<h3><a href="/results/schedule">See Race Schedule</a>
+	<h3><a href="/results/listing/">See Full Event Listing</a></h3>

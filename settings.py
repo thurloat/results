@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = (
     # Hybrid Django/Google authentication
     #'ragendja.auth.middleware.HybridAuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
     'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',

@@ -1,0 +1,16 @@
+{% extends 'site.html' %}
+
+{% block content %}
+<div class="icf">
+				
+				<form method="POST" enctype="multipart/form-data" action="/results/lif">
+					<h1> LIF Uploader </h1>
+					<input type="file" name="csv" />
+					<input type="submit" />
+				</form>
+				 <h1>Log:</h1>
+				{% for msg in errmsg %}
+					{{ msg }}<br />
+				{% endfor %}
+</div>
+{% endblock %}

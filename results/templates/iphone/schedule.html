@@ -1,0 +1,14 @@
+{% regroup object_list|dictsort:"raceTime" by raceTime.date as date_list %}
+<ul>
+{% for date in date_list %}
+	<li class="group">{{ date.grouper|date:"l, F jS" }}</li>
+	{% for race in date.list %}
+	<li>
+			<a href="/results/races/{{race.event.eventString}}/#{{race.heatNumber}}" {% if race.hasResults %}style="color:#1E4E9C;"{% endif %}>
+					{{ race.raceTime|time:"H:i" }} {{race.heatNumber}} {{ race.event }} 
+			</a>	
+	</li>
+	{% endfor %}
+
+{% endfor %}
+</ul>

@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object, delete_object, \
     update_object
 from google.appengine.ext import db
@@ -24,13 +25,13 @@ from bios.models import Crew, Country, Athlete
 from results.models import Event
 
 def show_bios_overview_mobile(request):
-    memcache.delete("biosHtml")
-    data = memcache.get('biosHtml')
-    if data is not None:
-        return data
+    #memcache.delete("biosHtml")
+    #data = memcache.get('biosHtml')
+    #if data is not None:
+    #    return data
     countryList = Country.all().order("name")
     data = UA_object_list(request,Event.all(), template_name="mobile-bioOverview.html", extra_context={'countries':countryList})
-    memcache.add("biosHtml", data)
+    #memcache.add("biosHtml", data)
     return data
 
 def show_athletes_all_country(request, country):
@@ -58,10 +59,19 @@ def show_crew(request, key):
     crew = Crew.get(key)
     return UA_object_list(request,Athlete.gql("WHERE crew = :1", crew), extra_context={'crew':crew})
     
+def flag_view(request,id):
+    country = Country.all().filter("code =",id).get()
+    if country and country.flag:
+        response = HttpResponse()
+        response['Content-Type'] = 'image/gif'
+        response.write(country.flag)
+        return response
+    else:
+        raise Http404('Sorry, I couldnt find that image!')
+
 def image_view(request, id):
     athlete = Athlete.all().filter("bibNum =",int(id)).get()
-    print ""
-    print athlete.picture
+    
     if athlete and athlete.picture: 
         response = HttpResponse()
         response['Content-Type'] = 'image/png'
@@ -133,4 +143,4 @@ def bio_upload(request):
             except:
                 errmsg += [r]
     errmsg += ["finished"]                
-    return UA_direct(request, 'bios/upload.html', extra_context={'errmsg':errmsg})
+    return direct_to_template(request, 'bios/upload.html', extra_context={'errmsg':errmsg})

@@ -16,7 +16,7 @@
 	<li><a href="/bio/athletes/{{ country.code }}">All Staff</a></li>
 	<li class="group">Athletes by Event</li>
 	{% for crew in country.crew_country %}
-		<li><a href="/bio/athletes/{{ country.code }}/{{ crew.crewNum }}/">{{ crew }}</a></li>
+		<li><a href="/bio/athletes/{{ country.code }}/{{ crew.crewNum }}">{{ crew }}</a></li>
 	{% endfor %}
 </ul>
 {% endfor %}

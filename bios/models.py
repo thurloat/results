@@ -37,12 +37,14 @@ class Athlete(db.Model):
 	bibNum = db.IntegerProperty()
 	firstName = db.StringProperty()
 	lastName = db.StringProperty()
-	birthDate = db.DateProperty()
+	birthDate = db.StringProperty()
 	homeTown = db.StringProperty()
 	coach = db.StringProperty()
 	picture = db.BlobProperty()
 	country = db.ReferenceProperty(Country, collection_name = "athlete_country")
 	gender = db.StringProperty(choices=('Male','Female'))
+	accred = db.StringProperty()
+	bio = db.TextProperty()
 		
 	def __unicode__(self):
 		return '%s. %s %s, %s' % (self.bibNum, self.firstName, self.lastName, self.country)

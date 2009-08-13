@@ -10,8 +10,6 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 from django.contrib import admin
 from bios.models import Athlete, Country, Crew
 
-
-
 class AthleteInline(admin.TabularInline):
 	model = Athlete
 

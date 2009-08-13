@@ -16,4 +16,11 @@ class RaceInline(admin.TabularInline):
 class EventAdmin(admin.ModelAdmin):
 	inlines = (RaceInline,)
 	
+class ResultInline(admin.TabularInline):
+	model = Results
+	
+class RaceAdmin(admin.ModelAdmin):
+	inlines = (ResultInline,)
+	
 admin.site.register(Event,EventAdmin)
+admin.site.register(Race,RaceAdmin)

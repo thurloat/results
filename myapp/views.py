@@ -43,8 +43,8 @@ def create_admin_user(request):
             user.is_staff and user.is_superuser and
             user.check_password('admin')):
         user = User(key_name='admin', username='admin',
-            email='admin@localhost', first_name='Boss', last_name='Admin',
+            email='adam@norex.ca', first_name='Boss', last_name='Admin',
             is_active=True, is_staff=True, is_superuser=True)
-        user.set_password('admin')
+        user.set_password('devpass')
         user.put()
     return render_to_response(request, 'myapp/admin_created.html')

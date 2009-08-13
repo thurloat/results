@@ -7,13 +7,14 @@
 		<div>
 			<h3>{{ athlete.lastName }}, {{ athlete.firstName }}</h3>
 			{{ athlete.country.name }}, {{ athlete.country.code }}<br />
-			{% if athlete.birthday %}{{ athlete.birthDate }}<br />{% endif %}
+			{% if athlete.birthDate %}{{ athlete.birthDate }}<br />{% endif %}
 		</div>
 	</li>
 	<li class="group">Details</li>
 	<li>Bib Number: {{ athlete.bibNum }}</li>
 	{% if athlete.homeTown %}<li>Hometown: {{ athlete.homeTown }}</li>{% endif %}
 	{% if athlete.coach %}<li>Coach: {{ athlete.coach }}</li>{% endif %}
+	{% if athlete.bio %}<li>Full Bio:<br /> <p>{{ athlete.bio }}</p></li>{% endif %}
 	<li class="group">Events</li>
 	
 	{% for result in athlete.result_athlete %}

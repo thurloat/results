@@ -20,7 +20,7 @@
 				{% if result.athlete %}
 				<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
 				{% else %}
-					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }},{% endfor %}</a>
+					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }}, {% endfor %}</a>
 				{% endif %}
 			</td>
 			<td>{% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}</td>

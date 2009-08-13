@@ -33,7 +33,7 @@ def show_events(request):
 
 def show_races_event(request, event):
     event = Event.all().filter("eventString =", event).fetch(1)
-    return UA_object_list(request,Race.all().filter("event =",event[0]))
+    return UA_object_list(request,Race.all().filter("event =",event[0]).order("raceNumber"))
 
 
 def ajax(request):
@@ -138,6 +138,47 @@ def purge_event(request):
     return UA_direct(request,'race-upload.html')
     
     
+def lif_upload(request):
+    errmsg = []
+    if request.method == 'POST':
+        errmsg += ['beginning import']
+        
+        import re
+        import os
+        
+        from bios.models import Country, Athlete, Crew
+        file = request.FILES['csv']
+        uploadfile=file.name; 
+        
+        file_contents = request.FILES['csv'].read().strip()
+        
+        p = re.compile('\r', re.IGNORECASE)
+        file_contents = p.sub('\n',file_contents)
+        #file_contents = self.request.get('lif').strip()
+        import csv
+        imported = []
+        importReader = csv.reader(file_contents.split('\n'))
+
+        selectedRace = None
+        for row in importReader:
+            imported += [row]
+        
+        selectedRace = Race.all().filter("raceNumber =",int(imported[0][0])).fetch(1)[0]
+        #print selectedRace
+        errmsg += [selectedRace]
+        
+        imported.pop(0)
+        for r in imported:
+            if len(r) > 1:
+                result = Results.all().filter("race =", selectedRace).filter("laneNumber =",r[2]).fetch(1)
+                if len(result) < 1:
+                    errmsg += ["Did not work for %s" % (r)]
+                else:
+                    result[0].place = r[0]
+                    result[0].finalTime = r[6]
+                    result[0].put()
+
+    return UA_direct(request, 'results/lif-upload.html', extra_context={"errmsg":errmsg})
 def evt_upload(request):
     if request.method == 'POST':
         memcache.delete("raceshtml")

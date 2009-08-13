@@ -23,8 +23,7 @@ from norex.generic import UA_object_list, UA_object_detail
 
 
 def list_latest(request):
-    
-    return UA_object_list(request,Event.all())
+    return UA_object_list(request,Event.all().order("time"))
 def event_detail(request, id):
     return UA_object_detail(request,Event.all(),slug_field="eventNumber",slug=int(id), template_name="mobile-eventDetail.html", template_object_name = "event")
 def image_view(request, id):

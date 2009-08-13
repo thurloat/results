@@ -36,7 +36,7 @@ class Race(db.Model):
 	
 	
 	def __unicode__(self):
-		return '%s - %s' % (self.raceNumber, self.description)
+		return '%s - %s - %s - %s' % (self.raceNumber, self.heatNumber, self.roundNumber, self.event.eventString)
 	
 	def __json__(self):
 		return self.description

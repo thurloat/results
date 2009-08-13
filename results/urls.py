@@ -22,4 +22,5 @@ urlpatterns = patterns('results.views',
 	(r'^purgera$',              'purge_race'),
 	(r'^purgere$',              'purge_results'),
 	(r'^purgee$',              'purge_event'),
+	(r'^lif$',                 'lif_upload'),
 )

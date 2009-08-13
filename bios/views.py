@@ -17,7 +17,7 @@ from mimetypes import guess_type
 from ragendja.dbutils import get_object_or_404, prefetch_references
 from ragendja.template import render_to_response
 from google.appengine.api import memcache
-
+from django.utils.encoding import smart_unicode
 
 from norex.generic import UA_object_list, UA_object_detail, UA_direct
 from bios.models import Crew, Country, Athlete
@@ -123,6 +123,12 @@ def bio_upload(request):
                     athlete.lastName=r[3]
                     athlete.gender="Male" if r[4] is "M" else "Female"
                     athlete.country = selectedCountry
+                    if len(r) > 8:
+                        athlete.birthDate = r[8]
+                        athlete.accred = r[9]
+                    if len(r) > 11:
+                        athlete.homeTown = smart_unicode(r[10])
+                        athlete.bio = smart_unicode(r[11])
                     athlete.put()
             except:
                 errmsg += [r]

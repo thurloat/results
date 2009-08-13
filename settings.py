@@ -24,7 +24,7 @@ COMBINE_MEDIA = {
 
 # Change your email settings
 if on_production_server:
-    DEFAULT_FROM_EMAIL = 'bla@bla.com'
+    DEFAULT_FROM_EMAIL = 'development@norex.ca'
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # Make this unique, and don't share it with anybody.
@@ -121,7 +121,12 @@ IGNORE_APP_SETTINGS = IGNORE_APP_URLSAUTO = (
     # 'yetanotherapp',
 )
 
-LOGIN_REQUIRED_PREFIXES=[("/results/upload",), ('/results/delete')]
+LOGIN_REQUIRED_PREFIXES=("/results/upload",
+                         '/results/delete',
+                         '/results/raceupload',
+                         '/results/purge',
+                         '/bio/upload',
+                         '/bio/purge',)
 
 # Remote access to production server (e.g., via manage.py shell --remote)
 DATABASE_OPTIONS = {

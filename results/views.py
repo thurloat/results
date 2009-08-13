@@ -25,6 +25,15 @@ messages = []
 
 from results.models import Race, Results, Event
 
+def simple(request):
+    race = Race.all().filter("hasResults =", True).order("-raceNumber").fetch(1)
+    if len(race)>0:
+        results = Results.all().filter("race =",race[0]).order("place")
+    else:
+        results = None
+    return UA_direct(request,template="results/simple.html", extra_context={'results':results,'race':race[0] if len(race)>0 else None})
+
+
 def show_schedule(request):
     return UA_object_list(request,Race.all().order("raceTime").filter("raceTime !=",None), template_name="schedule.html")
 

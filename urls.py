@@ -16,7 +16,7 @@ urlpatterns = auth_patterns + patterns('norex.generic',
 )   + patterns('',
     
     ('^admin/(.*)',     admin.site.root),
-    (r'^ajax$',         'results.views.ajax'),
+    (r'^simple/$',         'results.views.simple'),
     # Override the default registration form
     url(r'^account/register/$', 'registration.views.register',
         kwargs={'form_class': UserRegistrationForm},

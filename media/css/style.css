@@ -483,3 +483,20 @@ padding-bottom:10px!important;
 div#contentInner div {
 background:none!important;
 }
+div.icf table {
+border-top:1px solid #ccc;
+border-bottom:1px solid #ccc;
+padding:10px 0 10px 0;
+}
+
+div.icf table td {
+text-align:center;
+font-size:14px;
+padding-bottom:10px;
+}
+
+div.icf table th {
+text-align:center;
+padding:0 10px 10px 10px;
+color:#b4161d;
+}

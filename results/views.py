@@ -200,6 +200,72 @@ def lif_upload(request):
         selectedRace.hasResults = True
         selectedRace.put()
     return direct_to_template(request, 'results/lif-upload.html', extra_context={"errmsg":errmsg})
+
+def populate_races(request):
+    errmsg = []
+    if request.method == 'POST':
+        errmsg += ['beginning import']
+        
+        import re
+        import os
+        
+        from bios.models import Country, Athlete, Crew
+        file_contents = request.FILES['evt'].read().strip()
+
+        #file_contents = self.request.get('lif').strip()
+        import csv
+        imported = []
+        importReader = csv.reader(file_contents.split('\n'))
+        for row in importReader:
+            imported += [row]
+        
+        selectedEvent = None
+        selectedRace = None    
+        for row in imported:
+            if len(row) == 4:
+                fields = row[3].strip().split(" ")
+                evtStr = "%s-%s-%s" % (fields[2],fields[3],fields[4].strip("m"))
+                selectedEvent = Event.all().filter("eventString =", evtStr).fetch(1)[0]
+                selectedRace = Race.all().filter("raceNumber =", int(row[0])).fetch(1)[0]
+                print selectedRace.raceNumber
+                print selectedEvent
+            else:
+                #print row[1]
+                """
+                is it an athlete or a crew for the result? check class?
+                
+                if it's an athlete, search bibNumber set Result with lane number and athlete
+                
+                if it's a crew, search for the bibNum participating in the event and insert
+                     that crew into a new result containing the lane number
+                """
+                
+                newResult = Results()
+                newResult.race = selectedRace
+                
+                chkRace = Race.all().filter("event =", selectedEvent).fetch(1)[0]
+                
+                
+                if len(chkRace.results_race) > 0 and chkRace.results_race[0].crew is not None:
+                    #find and assign crew
+                    chkAthlete = Athlete.all().filter("bibNum =",int(row[1])).fetch(1)
+                    #print chkAthlete
+                    for crew in chkAthlete[0].crew_athlete:
+                        for result in crew.result_crew:
+                            if result.race.event == selectedEvent:
+                                newResult.crew = crew
+                else:
+                    newResult.athlete = Athlete.all().filter("bibNum =", int(row[1])).fetch(1)[0]
+                
+                newResult.laneNumber = row[2]
+                selc = Country.all().filter("code =", row[5]).fetch(1)[0]
+                newResult.country = selc
+                newResult.put()
+                errmsg += [newResult]
+                
+            
+    return render_to_response(request, 'results/populate.html', {'errmsg':errmsg})    
+
 def evt_upload(request):
     if request.method == 'POST':
         memcache.delete("raceshtml")
@@ -224,13 +290,13 @@ def evt_upload(request):
                         matched = e
                         
                 if matched is not None:
-                    races = matched.race_set.filter("heatNumber =", "H" + row[2]).fetch(1000);
+                    races = matched.race_set.filter("heatNumber =", "H" + row[2]).fetch(1000)
                     if races is not None and races[0] is not None:
                         race = races[0]
                         race.raceNumber = int(row[0])
                         race.put()
             
-    return render_to_response(request, 'results/evtupload.html', {'messages':messages});
+    return render_to_response(request, 'results/evtupload.html', {'messages':messages})
         
 
 def race_upload(request):

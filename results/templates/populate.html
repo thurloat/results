@@ -1,0 +1,16 @@
+{% extends 'site.html' %}
+
+{% block content %}
+<div class="icf">
+				
+				<form method="POST" enctype="multipart/form-data" action="/results/populate">
+					<h1> EVT Uploader / populator </h1>
+					<input type="file" name="evt" />
+					<input type="submit" />
+				</form>
+				 <h1>Log:</h1>
+				{% for msg in errmsg %}
+					{{ msg }}<br />
+				{% endfor %}
+</div>
+{% endblock %}

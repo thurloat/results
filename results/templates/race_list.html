@@ -11,7 +11,7 @@
 		<tr>
 			<th>Place:</th><th>Lane:</th><th>Country:</th><th>Participants:</th><th>Final Time:</th>
 		</tr>
-		{% for result in race.results_race %}
+		{% for result in race.results_race|dictsort:"place" %}
 		<tr>
 			<td>{{ result.place }}</td>
 			<td>{{ result.laneNumber }}</td>

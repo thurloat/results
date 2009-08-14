@@ -7,6 +7,7 @@
 {% block content %}
 
 <div class="icf">
+	<img src="/images/norex.png" style="float:right;" />
 	<h1>Latest Result</h1>
 	<h3>{{ race.event.eventString }} - Heat: {{ race.heatNumber }} - {{ race.raceTime|date:"D," }} {{ race.raceTime|time:"H:i" }}</h3>
 	<table>
@@ -17,13 +18,13 @@
 		<tr>
 			<td>{{ result.place }}</td>
 			<td>{{ result.laneNumber }}</td>
-			<td>{{ result.country.code }}</td>
+			<td><img src="/bio/flag/{{result.country.code}}/" alt="{{result.country.code}}" height="30px"/></td>
 			<td>
 				{% if result.athlete %}
 				<a href="/bio/athlete/{{ result.athlete.bibNum }}">{{ result.athlete.lastName }}</a>
 				{% else %}
 					<a href="/bio/crew/{{ result.crew.key }}">{% for athlete in result.crew.athletes %}{{ athlete.lastName }}, {% endfor %}</a>
-				{% endif %}
+				{% endif %} {{ result.country.code }}
 			</td>
 			<td>{% if result.finalTime %}{{ result.finalTime }}{%else%}No Time{%endif%}</td>
 		</tr>

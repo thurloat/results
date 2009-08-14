@@ -12,7 +12,7 @@
 {% for race in object_list %}
 <ul id="{{race.heatNumber}}" title="Heat {{race.heatNumber}}">
 	<li class="group">heat: {{ race.heatNumber }}</li>
-	{% for result in race.results_race %}
+	{% for result in race.results_race|dictsort:"place" %}
 		<li>
 		Lane:{{ result.laneNumber }}, {{ result.country.code }},
 		{% if result.athlete %}

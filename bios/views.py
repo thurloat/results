@@ -24,6 +24,9 @@ from norex.generic import UA_object_list, UA_object_detail, UA_direct
 from bios.models import Crew, Country, Athlete
 from results.models import Event
 
+from norex.utils import memoize
+import re
+
 def show_bios_overview_mobile(request):
     #memcache.delete("biosHtml")
     #data = memcache.get('biosHtml')
@@ -58,7 +61,11 @@ def show_crews(request):
 def show_crew(request, key):
     crew = Crew.get(key)
     return UA_object_list(request,Athlete.gql("WHERE crew = :1", crew), extra_context={'crew':crew})
-    
+
+def flag_view_(request, id):
+    return "flag: %s" % (id)
+
+@memoize(flag_view_, memcache=True, time=600)
 def flag_view(request,id):
     country = Country.all().filter("code =",id).get()
     if country and country.flag:
